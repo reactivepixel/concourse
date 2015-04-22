@@ -1,0 +1,23 @@
+{
+  "name": "concourse",
+  "version": "1.0.0",
+  "authors": [
+    "Chapman <chapman@apextion.com>"
+  ],
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.4",
+    "fontawesome": "~4.3.0"
+  }
+}
