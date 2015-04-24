@@ -8,6 +8,7 @@ var DefaultLayout = React.createClass({
 			  <meta charSet="utf-8" />
 			  <meta name="viewport" content="width=device-width, maximum-scale=1" />
 			  <title>Portfolio</title>
+			  <link rel="stylesheet" href="/public/inc/style.css" />
 			</head>
 			<body>
 			  <div id="main_content" className="container">

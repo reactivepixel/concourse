@@ -15,11 +15,11 @@ gulp.task('bower', function() { 
 
 gulp.task('icons', function() { 
     return gulp.src(config.bowerDir + '/fontawesome/fonts/**.*') 
-        .pipe(gulp.dest('./public/fonts')); 
+        .pipe(gulp.dest('./public/inc/fonts')); 
 });
 
 gulp.task('css', function() { 
-    return gulp.src(config.sassPath + '/style.scss')
+    return gulp.src(config.sassPath + '/default.scss')
          .pipe(sass({
              style: 'compressed',
              loadPath: [
@@ -31,7 +31,7 @@ gulp.task('css', function() { 
             .on("error", notify.onError(function (error) {
                  return "Error: " + error.message;
              }))) 
-         .pipe(gulp.dest('./public/css')); 
+         .pipe(gulp.dest('./public/inc/css')); 
 });
 
 // Rerun the task when a file changes
