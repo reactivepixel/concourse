@@ -4,15 +4,15 @@ var app = express();
 var mongoose = require('mongoose');
 
 // config vars
-var routes = require('./routes');
+var ctrls = require('./routes');
 
 // View Rendering with React
 app.set('view engine', 'jsx'); // Set the View Engine
 app.engine('jsx', require('express-react-views').createEngine({beautify:true}));
 
 // Routes
-app.route('/').get(routes.index);
-app.route('/list').get(routes.list);
+app.route('/').get(ctrls.index);
+app.route('/list').get(ctrls.list);
 
 
 // Disable etag headers on responses
