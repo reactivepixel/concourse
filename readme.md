@@ -9,7 +9,7 @@ brew install node
 
 npm install
 
-sudo npm install -g gulp bower
+sudo npm install -g gulp bower nodev
 
 gulp
 
@@ -21,3 +21,6 @@ mkdir -p /data/db
 
 start mongo Server
 mongod
+
+For Development Server Run
+nodev app.js

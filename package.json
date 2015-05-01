@@ -9,6 +9,7 @@
   "author": "Chris Chapman",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.12.3",
     "bower": "^1.4.1",
     "express": "^4.12.3",
     "express-react-views": "^0.7.2",
@@ -20,6 +21,7 @@
     "gulp": "^3.8.11",
     "gulp-bower": "0.0.10",
     "gulp-notify": "^2.2.0",
-    "gulp-ruby-sass": "^0.7.1"
+    "gulp-ruby-sass": "^0.7.1",
+    "nodev": "^0.8.7"
   }
 }
