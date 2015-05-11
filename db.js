@@ -1,16 +1,8 @@
-var http = require ('http');             // For serving a basic web page.
-var mongoose = require ("mongoose"); // The reason for this demo.
+var mongoose 	= require ("mongoose");
 
 // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.
-var uristring =
-process.env.MONGOLAB_URI ||
-process.env.MONGOHQ_URL ||
-'mongodb://localhost/test';
-
-// The http server will listen to an appropriate port, or default to
-// port 5000.
-var theport = process.env.PORT || 3000;
+var uristring = process.env.MONGOLAB_URI || 'mongodb://localhost/test';
 
 // Makes connection asynchronously.  Mongoose will queue up database
 // operations and release them when the connection is complete.
