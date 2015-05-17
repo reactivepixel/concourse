@@ -35,7 +35,7 @@ router.use(function(req, res, next) {
 
 // Basic Test Route
 router.get('/', function(req, res) {
-    res.json({ message: 'The testing is strong with this one... Good. Very Good.' });   
+    res.json({ message: 'The testing is strong with this one... Good. Very Good. This really should be a route.' });   
 });
 
 

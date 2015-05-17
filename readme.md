@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/reactivepixel/concourse.svg?branch=master)](https://travis-ci.org/reactivepixel/concourse)
+
 install Homebrew if not already installed
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 

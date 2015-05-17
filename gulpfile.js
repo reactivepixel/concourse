@@ -9,11 +9,17 @@ var config = {
 	bowerDir: './bower_components' 
 }
 
-gulp.task('servers', function() { 
+
+// startup required services to run the app server
+gulp.task('server', function() { 
+
+    // spawn in a child process mongodb
     child_process.exec('mongod', function(err,stdout,stderr){
     	console.log(stdout);
     });
-    child_process.exec('node app.js', function(err,stdout,stderr){
+
+    // spawn in a child process the node server
+    child_process.exec('nodev app.js', function(err,stdout,stderr){
     	console.log(stdout);
     });
 });
@@ -50,4 +56,4 @@ gulp.task('css', function() { 
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'icons', 'css']);
+  gulp.task('default', ['bower', 'icons', 'css', 'server']);
