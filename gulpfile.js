@@ -5,7 +5,7 @@ var gulp = require('gulp'), 
 	child_process = require('child_process');
 
 var config = {
-	 sassPath: './resources/sass',
+	 sassPath: './app/resources/sass',
 	bowerDir: './bower_components' 
 }
 
@@ -40,7 +40,7 @@ gulp.task('css', function() { 
          .pipe(sass({
              style: 'compressed',
              loadPath: [
-                 './resources/sass',
+                  sassPath,
                  config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
                  config.bowerDir + '/fontawesome/scss',
              ]
@@ -48,7 +48,7 @@ gulp.task('css', function() { 
             .on("error", notify.onError(function (error) {
                  return "Error: " + error.message;
              }))) 
-         .pipe(gulp.dest('./public/inc/css')); 
+         .pipe(gulp.dest('./public/css')); 
 });
 
 // Rerun the task when a file changes
