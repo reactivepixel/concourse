@@ -1,4 +1,10 @@
-var APIv1 = require('express').Router(); // get an instance of the express Router
+var APIv1       = require('express').Router(); // get an instance of the express Router
+var bodyParser  = require('body-parser');
+
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+APIv1.use(bodyParser.urlencoded({ extended: true }));
+APIv1.use(bodyParser.json());
 
 
 // middleware to use for all requests
@@ -17,24 +23,27 @@ APIv1.get('/', function(req, res) {
 });
 
 
-
-APIv1.get('/bears')
-
 // create a bear (accessed at POST http://localhost:3000/api/bears)
-.post(function(req, res) {
+APIv1.post('/msg/save', function(req, res) {
+    //Models
+    var Msg = require('../../models/msg');
 
-    var bear = new Bear(); // create a new instance of the Bear model
-    bear.name = req.body.name; // set the bears name (comes from the request)
+    var msg = new Msg({
+        content:      req.body.content,
+        user:         req.body.user,
+        channel_id:   req.body.channel_id
+    });
 
     // save the bear and check for errors
-    bear.save(function(err) {
+    msg.save(function(err) {
         if (err)
             res.send(err);
-
+        }
         res.json({
-            message: 'Bear created!'
+            message: 'msg created!'
         });
     });
 
 });
+
 module.exports = APIv1;
