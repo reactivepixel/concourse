@@ -1,9 +1,9 @@
 // npm modules
 var express 				= require('express'),
-	app 							= express(),
-	mongoose 					= require('mongoose'),
+	app 					= express(),
+	mongoose 				= require('mongoose'),
 	bodyParser 				= require('body-parser'),
-	db     						= require('./db');
+	db     					= require('./db');
 
 //Models
 var Bear     = require('./models/bear');
@@ -22,49 +22,16 @@ var port = process.env.PORT || 3000;
 
 // ROUTES FOR OUR API
 // =============================================================================
-var router = express.Router();              // get an instance of the express Router
-
-
-// middleware to use for all requests
-router.use(function(req, res, next) {
-    // do logging
-    console.log('Detected Incoming Request. Logging Event.');
-    next(); // make sure we go to the next routes and don't stop here
-});
-
-
-// Basic Test Route
-router.get('/', function(req, res) {
-    res.json({ message: 'The testing is strong with this one... Good. Very Good. This really should be a route.' });   
-});
-
-
-
-router.route('/bears')
-
-    // create a bear (accessed at POST http://localhost:3000/api/bears)
-    .post(function(req, res) {
-        
-        var bear = new Bear();      // create a new instance of the Bear model
-        bear.name = req.body.name;  // set the bears name (comes from the request)
-
-        // save the bear and check for errors
-        bear.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Bear created!' });
-        });
-        
-    });
-
+var APIv1 = require('./routes/api/v1');
+var master_routes = require('./routes/master');
 
 
 // more routes for our API will happen here
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/api', router);
+app.use('/', master_routes);
+app.use('/api', APIv1);
 
 
 // START THE SERVER
