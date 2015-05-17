@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '0.12'
 deploy:
-  app: concourse\-app
+  app: concourse-app
   provider: heroku
   api_key:
     secure: ei7h8XxRa/OrKO64HDWGvSMwoaMY/j79rdkMej1HsQJVyjFMK/DiE+zePbJw1pTkpdHOK89ZwRTjePf8ojwneD5mgvCLw+4olrGTv8ZUaYItKwkIIccxDiHN8CmsYkneen+C8tjYzl4h8PRwl/Bdwtb4ghkBwGNpL/Yg4pBZ+vM=
