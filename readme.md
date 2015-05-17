@@ -9,7 +9,7 @@ brew install node
 
 npm install
 
-sudo npm install -g gulp bower nodev
+sudo npm install -g gulp bower nodev mocha
 
 gulp
 

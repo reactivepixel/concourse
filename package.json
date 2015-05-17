@@ -4,7 +4,7 @@
   "description": "init desc",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "jest"
   },
   "author": "Chris Chapman",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "gulp-bower": "0.0.10",
     "gulp-notify": "^2.2.0",
     "gulp-ruby-sass": "^0.7.1",
+    "jest-cli": "^0.4.4",
     "nodev": "^0.8.7"
   }
 }
