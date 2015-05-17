@@ -82,4 +82,9 @@ Gulp is configured to start your Mongod process and the Node Server as well as c
 gulp
 ```
 
+## FAQ
+
+1. Gulp / Bower Errors when installing.
+	* If there is a issue regarding bower installing (the first time you run) you may need to reconfigure your system if you are behind a corporate firewall. The Issue and solution are well documented [here](http://stackoverflow.com/questions/4891527/git-protocol-blocked-by-company-how-can-i-get-around-that/10729634#10729634).
+
 View the app at [http://localhost:3000](http://localhost:3000)

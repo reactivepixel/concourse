@@ -40,7 +40,7 @@ gulp.task('css', function() { 
          .pipe(sass({
              style: 'compressed',
              loadPath: [
-                  sassPath,
+                 config. sassPath,
                  config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
                  config.bowerDir + '/fontawesome/scss',
              ]
