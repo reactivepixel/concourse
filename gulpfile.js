@@ -1,12 +1,29 @@
 var gulp = require('gulp'),     
-	sass = require('gulp-ruby-sass') 
-	notify = require("gulp-notify") 
-	bower = require('gulp-bower');
+	sass = require('gulp-ruby-sass') ,
+	notify = require("gulp-notify") ,
+	bower = require('gulp-bower'),
+	child_process = require('child_process');
 
 var config = {
 	 sassPath: './resources/sass',
 	bowerDir: './bower_components' 
 }
+
+
+// startup required services to run the app server
+gulp.task('server', function() { 
+
+    // spawn in a child process mongodb
+    child_process.exec('mongod', function(err,stdout,stderr){
+    	console.log(stdout);
+    });
+
+    // spawn in a child process the node server
+    child_process.exec('nodev app.js', function(err,stdout,stderr){
+    	console.log(stdout);
+    });
+});
+
 
 gulp.task('bower', function() { 
     return bower()
@@ -39,4 +56,4 @@ gulp.task('css', function() { 
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'icons', 'css']);
+  gulp.task('default', ['bower', 'icons', 'css', 'server']);

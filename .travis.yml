@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+- '0.12'
+deploy:
+  app: fsconcourse
+  provider: heroku
+  api_key:
+    secure: Xb0Ou+AQ5YdtMu8HZ/K3WjmssJUzfW5Mklhp7+160780e/sotNJE2rQ/LgFQRZuiXn9lG7UNj/8T7hbomgwVzexoT/VEJLS7oufIk1xXEp/jV2W19wN30ro9/SUlrXTLJ8DSe11COB9bptUdCyqwnoVHKnFv1ynqJ3ZTDA1S6qQ=
