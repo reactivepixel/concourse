@@ -19,6 +19,10 @@ brew install mongodb && mongod
 create local space for Mongo Data
 mkdir -p /data/db
 
+gem install travis
+
+rbenv rehash (Ruby rbenv required, Need instructions still)
+
 start mongo Server
 mongod
 
