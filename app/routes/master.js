@@ -16,7 +16,6 @@ master_routes.get('/list', function(req, res) {
     });
 });
 
-
 // route /detail
 master_routes.get('/detail/:id', function(req, res) {
     res.render('detail', {

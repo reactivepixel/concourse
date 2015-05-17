@@ -1,6 +1,9 @@
 var APIv1       = require('express').Router(); // get an instance of the express Router
 var bodyParser  = require('body-parser');
 
+// Models
+var Msgs = require('../../models/msg');
+
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 APIv1.use(bodyParser.urlencoded({ extended: true }));
@@ -23,27 +26,38 @@ APIv1.get('/', function(req, res) {
 });
 
 
-// create a bear (accessed at POST http://localhost:3000/api/bears)
-APIv1.post('/msg/save', function(req, res) {
+// save a msg
+APIv1.post('/user/:user/msgs/save', function(req, res) {
     //Models
-    var Msg = require('../../models/msg');
-
-    var msg = new Msg({
+    
+    var msg = new Msgs({
         content:      req.body.content,
-        user:         req.body.user,
+        user:         req.params.user,
         channel_id:   req.body.channel_id
-    });
+    })
 
     // save the bear and check for errors
     msg.save(function(err) {
-        if (err)
+        if (err) {
             res.send(err);
         }
+        
         res.json({
             message: 'msg created!'
         });
+
     });
 
+});
+
+
+
+// return all user msgs
+APIv1.get('/user/:user/msgs', function(req, res) {
+  console.log('hit');
+    Msgs.find({ user: req.params.user }, function(err, docs){
+      res.json(docs);
+    });
 });
 
 module.exports = APIv1;

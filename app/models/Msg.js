@@ -10,4 +10,4 @@ var MsgSchema   = new Schema({
     updated_at: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Msg', MsgSchema);
+module.exports = mongoose.model('Msgs', MsgSchema);
