@@ -9,7 +9,9 @@ var express 			= require('express'),
 	cookieParser	 	= require('cookie-parser'),
 	bodyParser 			= require('body-parser'),
 	session 				= require('express-session'),
-	db     					= require('./app/db');
+	db     					= require('./app/config/db');
+
+require('./app/config/passport')(passport); // pass passport for configuration
 
 // express config
 app.use(morgan('dev')); // log every request to the console
@@ -22,7 +24,11 @@ app.set('view engine', 'jsx'); // Set the View Engine
 app.engine('jsx', require('express-react-views').createEngine({beautify:true})); 
 
 // required for passport
-app.use(session({ secret: 'WhatsMyAgeAgain' })); // session secret
+app.use(session({ 
+	secret: 'WhatsMyAgeAgain',
+	resave: true,
+	saveUninitialized: true 
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -30,10 +36,11 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // ROUTES
 // =============================================================================
 var APIv1 = require('./app/routes/api/v1');
-var master_routes = require('./app/routes/master');
+var master_routes = require('./app/routes/master')(app, passport);
 
 // REGISTRATION OF ROUTES ======================================================
-app.use('/', master_routes);
+// app.use('/', master_routes);
+require('./app/routes/master.js')(app, passport);
 app.use('/api/v1', APIv1); // all of our api routes will be prefixed with /api/v1
 // static file handling
 app.use(express.static('/public/inc/css/default.css'));
