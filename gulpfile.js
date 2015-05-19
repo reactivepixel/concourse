@@ -36,8 +36,8 @@ gulp.task('icons', function() { 
 });
 
 gulp.task('dev', function () {
-  nodemon({ script: 'server.js'
-          , ext: 'html js'
+  nodemon({ script: 'app.js'
+          , ext: 'html js jsx'
           , ignore: ['ignored.js']
           , tasks: ['lint'] })
     .on('restart', function () {
@@ -66,4 +66,4 @@ gulp.task('css', function() { 
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'icons', 'css', 'lint', 'mongod', 'dev']);
+  gulp.task('default', ['bower', 'icons', 'css', 'mongod', 'dev']);

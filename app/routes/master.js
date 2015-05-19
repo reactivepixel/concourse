@@ -42,6 +42,7 @@ module.exports = function(app, passport) {
 
     // route /profile
     app.get('/profile', function(req, res) {
+        console.log('derrrrrrrrrp', req.user);
         res.render('profile', {
             name: 'killer',
             message: req.flash('signupMessage'),

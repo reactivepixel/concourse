@@ -5,7 +5,7 @@ var HelloMessage = React.createClass({
   render: function() {
     return (
       <DefaultLayout page_title={this.props.page_title}>
-        <div>Hello</div>
+        <div>Hello {this.props.user.local.email}</div>
       </DefaultLayout>
     );
   }
