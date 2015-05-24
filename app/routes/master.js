@@ -1,3 +1,6 @@
+var JSX         = require('node-jsx').install(),
+    React       = require('react'),
+    User        = require('../models/user');
 
 module.exports = function(app, passport) {
 
@@ -12,6 +15,13 @@ module.exports = function(app, passport) {
 
     // GET /login
     app.get('/login', function(req, res) {
+
+        // var markup = React.renderComponentToString(
+        //         Login({
+        //             user:user
+        //         })
+        //     )
+
         res.render('login', {
             message: req.flash('loginMessage'),
             name: 'killer',

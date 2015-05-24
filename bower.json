@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "bootstrap-sass-official": "~3.3.4",
-    "fontawesome": "~4.3.0"
+    "fontawesome": "~4.3.0",
+    "delorean": "~0.9.2"
   }
 }

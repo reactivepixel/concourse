@@ -1,5 +1,6 @@
 var gulp = require('gulp'),     
 	sass = require('gulp-ruby-sass') ,
+  uglify = require('gulp-uglify'),
 	notify = require("gulp-notify") ,
 	bower = require('gulp-bower'),
 	child_process = require('child_process'),
@@ -35,6 +36,12 @@ gulp.task('icons', function() { 
         .pipe(gulp.dest('./public/inc/fonts')); 
 });
 
+gulp.task('compress', function() {
+  return gulp.src('bower_components/delorean/dist/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('./public/js'));
+});
+
 gulp.task('dev', function () {
   nodemon({ script: 'app.js'
           , ext: 'html js jsx'
@@ -52,7 +59,7 @@ gulp.task('css', function() { 
              loadPath: [
                  config. sassPath,
                  config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
-                 config.bowerDir + '/fontawesome/scss',
+                 config.bowerDir + '/fontawesome/scss'
              ]
          }) 
             .on("error", notify.onError(function (error) {
