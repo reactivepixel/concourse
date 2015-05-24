@@ -6,8 +6,7 @@
     <title>React Tweets</title>
     <link rel="stylesheet" type="text/css" href="css/default.css">
     <!-- ReactJS -->
-    <script src="https://fb.me/react-0.13.3.min.js"></script>
-    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    
     <!-- Flux Transformer through Delorean -->
     <script src="js/delorean.js"></script>
     
@@ -18,18 +17,11 @@
       <button id="dataChanger">Trigger</button>
       <div id="result"></div>
     </div> 
+    
+    <!-- <script src="https://fb.me/react-0.13.3.min.js"></script> -->
+    <script src="js/react.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
-    <script>
-      var socket = io();
-
-      socket.on('derp', function(msg){
-        console.log('derp transfer complete', msg);
-      });
-
-      var trigger = function(){
-        socket.emit('hostage', {person:"me"});
-      }
-    </script>
     <script src="js/bundle.js"></script>
   </body>
 </html>

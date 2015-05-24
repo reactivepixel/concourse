@@ -61,10 +61,11 @@ console.log('Starting Node Server on Port ' + port);
 // Initialize socket.io
 var io = socketIO.listen(server);
 
-io.on('connection', function(socket){
+io.on('connection', function (socket){
 	console.log('Connection detected');
-	socket.on('hostage', function(msg){
-		console.log('hostage taken', msg);
-		io.emit('derp', {payload:"Recieved Derp"});
+	socket.on('sendMessage', function (payload){
+		console.log('Msg Sent to Server', payload);
+		io.emit('newMessage', payload);
+		console.log('Sending payload to clients\' stores');
 	});
 });
