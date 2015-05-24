@@ -61,5 +61,9 @@ console.log('Starting Node Server on Port ' + port);
 var io = socketIO.listen(server);
 
 io.on('connection', function(socket){
-	console.log('Connection detected', socket);
+	console.log('Connection detected');
+	socket.on('hostage', function(msg){
+		console.log('hostage taken', msg);
+		io.emit('derp', {payload:"Recieved Derp"});
+	});
 });

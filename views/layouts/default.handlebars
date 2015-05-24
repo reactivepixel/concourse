@@ -13,6 +13,17 @@
     <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
     <script>
       var socket = io();
+
+      socket.on('derp', function(msg){
+        console.log('derp transfer complete', msg);
+      });
+
+      var trigger = function(){
+        socket.emit('hostage', {person:"me"});
+      }
     </script>
+
+    <button onclick="trigger();">Trigger</button>
+
   </body>
 </html>
