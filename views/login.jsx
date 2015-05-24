@@ -1,10 +1,4 @@
-var React = require('react');
-var DefaultLayout = require('./layouts/default');
 
-var HelloMessage = React.createClass({
-  render: function() {
-    return (
-      <DefaultLayout page_title={this.props.page_title}>
       	<h1>Login</h1>
 		    <div class="alert alert-danger">{this.props.message}</div>
         <form action="/login" method="post">
@@ -24,9 +18,3 @@ var HelloMessage = React.createClass({
 
 	    <p>Need an account? <a href="/signup">Signup</a></p>
 	    <p>Or go <a href="/">home</a>.</p>
-      </DefaultLayout>
-    );
-  }
-});
-
-module.exports = HelloMessage;

@@ -5,7 +5,8 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index', {
             name: 'World',
-            page_title: 'SEO Time'
+            page_title: 'SEO Time',
+            markup: 'Did I do that?'
         });
     });
 

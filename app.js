@@ -2,6 +2,7 @@
 var express 			= require('express'),
 	app 						= express(),
 	port 						= process.env.PORT || 3000,
+  exphbs 					= require('express-handlebars'),
 	mongoose 				= require('mongoose'),
 	passport				= require('passport'),
 	flash						= require('connect-flash'),
@@ -9,7 +10,8 @@ var express 			= require('express'),
 	cookieParser	 	= require('cookie-parser'),
 	bodyParser 			= require('body-parser'),
 	session 				= require('express-session'),
-	db     					= require('./app/config/db');
+	db     					= require('./app/config/db'),
+	socketIO 				= require('socket.io');
 
 require('./app/config/passport')(passport); // pass passport for configuration
 
@@ -18,10 +20,13 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 
-// View Rendering with React
-app.set('views', './app/views'); // Set the views folder location
-app.set('view engine', 'jsx'); // Set the View Engine
-app.engine('jsx', require('express-react-views').createEngine({beautify:true})); 
+// View Rendering with Handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
+app.set('view engine', 'handlebars');
+
+// Disable etag headers on responses
+app.disable('etag');
+
 
 // required for passport
 app.use(session({ 
@@ -51,3 +56,10 @@ app.use(express.static('/public/inc/css/default.css'));
 var server = app.listen(port);
 
 console.log('Starting Node Server on Port ' + port);
+
+// Initialize socket.io
+var io = socketIO.listen(server);
+
+io.on('connection', function(socket){
+	console.log('Connection detected', socket);
+});
