@@ -48,7 +48,8 @@ var master_routes = require('./app/routes/master')(app, passport);
 require('./app/routes/master.js')(app, passport);
 app.use('/api/v1', APIv1); // all of our api routes will be prefixed with /api/v1
 // static file handling
-app.use(express.static('/public/inc/css/default.css'));
+
+app.use(express.static(__dirname+'/public'));
 
 // START THE SERVER
 // =============================================================================
