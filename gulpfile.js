@@ -94,7 +94,6 @@ gulp.task('css', function() { 
 // Rerun the task when a file changes
  gulp.task('watch', function() {
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
-     gulp.watch(config.jsPath + '/*.js', ['js']); 
 });
 
   gulp.task('default', ['bower', 'icons', 'css', 'js', 'mongod', 'dev']);

@@ -36,8 +36,7 @@ var IncrementDispatcher = Flux.createDispatcher({
       };
   }
 });
-
-
+ 
 // Component
 var IncrementView = React.createClass({
 
