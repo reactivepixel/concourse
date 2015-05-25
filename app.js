@@ -18,7 +18,12 @@ require('./app/config/passport')(passport); // pass passport for configuration
 // express config
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json()); 
+
 
 // View Rendering with Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
@@ -30,10 +35,10 @@ app.disable('etag');
 
 // required for passport
 app.use(session({ 
-	secret: 'WhatsMyAgeAgain',
+	secret: 'WhatsMyAgeAgain', // session secret
 	resave: true,
 	saveUninitialized: true 
-})); // session secret
+})); 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -44,18 +49,17 @@ var APIv1 = require('./app/routes/api/v1');
 var master_routes = require('./app/routes/master')(app, passport);
 
 // REGISTRATION OF ROUTES ======================================================
-// app.use('/', master_routes);
 require('./app/routes/master.js')(app, passport);
-app.use('/api/v1', APIv1); // all of our api routes will be prefixed with /api/v1
-// static file handling
 
+// API v1 routing
+app.use('/api/v1', APIv1); // all of our api routes will be prefixed with /api/v1
+
+// static file handling
 app.use(express.static(__dirname+'/public'));
 
 // START THE SERVER
 // =============================================================================
-
 var server = app.listen(port);
-
 console.log('Starting Node Server on Port ' + port);
 
 // Initialize socket.io
