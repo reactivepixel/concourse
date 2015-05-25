@@ -1,37 +1,56 @@
-var gulp            = require('gulp'),     
-    sass            = require('gulp-ruby-sass') ,
-    uglify          = require('gulp-uglify'),
-    notify          = require("gulp-notify") ,
-    bower           = require('gulp-bower'),
-    child_process   = require('child_process'),
-    nodemon         = require('gulp-nodemon'),
-    jshint          = require('gulp-jshint'),
-    // browserify      = require('gulp-browserify'),
+'use strict';
+
+var watchify        = require('watchify'),
     browserify      = require('browserify'),
     source          = require('vinyl-source-stream'),
-    reactify        = require('reactify');
+    buffer          = require('vinyl-buffer'),
+    gutil           = require('gulp-util'),
+    sourcemaps      = require('gulp-sourcemaps'),
+    assign          = require('lodash.assign'),
+    reactify        = require('reactify'),
+    gulp            = require('gulp'),     
+    sass            = require('gulp-ruby-sass') ,
+    bower           = require('gulp-bower'),
+    child_process   = require('child_process'),
+    nodemon         = require('gulp-nodemon');
 
 var config = {
-	 sassPath: './assets/sass',
-  jsPath: './assets/js',
-	bowerDir: './bower_components' 
+	 sassPath:   './assets/sass',
+  jsPath:     './assets/js',
+	bowerDir:   './bower_components' 
 }
  
 var production = process.env.NODE_ENV === 'production';
- 
-gulp.task('scripts', function () {
-  var bundler = browserify(['./assets/js/main.js'], {basedir: __dirname, debug: !production});
-  
-  bundler.transform(reactify);
-  var stream = bundler.bundle();
-  return stream
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./public/js'));
-});
 
-gulp.task('watchScripts', function() {
-  gulp.watch('assets/js/*.js', ['scripts']);
-});
+// add custom browserify options here
+var customOpts = {
+  entries: ['./assets/js/main.js'],
+  debug: true
+};
+
+var opts  = assign({}, watchify.args, customOpts),
+    b     = watchify(browserify(opts)); 
+
+// add transformations here
+b.transform(reactify);
+
+gulp.task('js', bundle); // so you can run `gulp js` to build the file
+b.on('update', bundle); // on any dep update, runs the bundler
+b.on('log', gutil.log); // output build logs to terminal
+
+function bundle() {
+  return b.bundle()
+    // log errors if they happen
+    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .pipe(source('bundle.js'))
+    // optional, remove if you don't need to buffer file contents
+    .pipe(buffer())
+    // optional, remove if you dont want sourcemaps
+    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
+       // Add transformation tasks to the pipeline here.
+    .pipe(sourcemaps.write('./')) // writes .map file
+    .pipe(gulp.dest('./public/js'));
+}
 
 // startup required services to run the app server
 gulp.task('mongod', function() { 
@@ -41,11 +60,6 @@ gulp.task('mongod', function() { 
     });
 });
 
-gulp.task('lint', function () {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-})
-
 gulp.task('bower', function() { 
     return bower()
          .pipe(gulp.dest(config.bowerDir)) 
@@ -54,15 +68,6 @@ gulp.task('bower', function() { 
 gulp.task('icons', function() { 
     return gulp.src(config.bowerDir + '/fontawesome/fonts/**.*') 
         .pipe(gulp.dest('./public/inc/fonts')); 
-});
-
-gulp.task('js', function() {
-  return gulp.src([
-      'bower_components/delorean/dist/*.js',
-      'assets/js/main.js'
-    ])
-    .pipe(uglify())
-    .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('dev', function () {

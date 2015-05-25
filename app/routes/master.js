@@ -15,13 +15,6 @@ module.exports = function(app, passport) {
 
     // GET /login
     app.get('/login', function(req, res) {
-
-        // var markup = React.renderComponentToString(
-        //         Login({
-        //             user:user
-        //         })
-        //     )
-
         res.render('login', {
             message: req.flash('loginMessage'),
             name: 'killer',

@@ -1,10 +1,12 @@
 var socket = io();
 var Flux = DeLorean.Flux;
+ 
 
-var haxId = 0
+ var xxx = require('./login');
+var fakeMsgID = 0
 
 var Messages = Flux.createStore({
-  messages: [{author: "sysop", content: "Initialized", id:haxId}],
+  messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
   newMessage: function (message) {
     this.messages.push(message);
     this.emit('change');
@@ -35,10 +37,10 @@ var MessagesDispatcher = Flux.createDispatcher({
 
 var MessageActions = {
   newMessage: function (author, content) {
-    MessagesDispatcher.newMessage({author: author, content: content, id: haxId++ });
+    MessagesDispatcher.newMessage({author: author, content: content, id: fakeMsgID++ });
   },
   sendMessage: function (author, content) {
-    socket.emit('sendMessage', {author: author, content: content, id: haxId++ });
+    socket.emit('sendMessage', {author: author, content: content, id: fakeMsgID++ });
     console.log('Emitting Msg to Server');
   }
 }
@@ -87,14 +89,14 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   render: function () {
     return (
       <input 
-          type="text" 
-          ref="message"
-          onChange={this.handleChange}
-          onKeyUp={this.handleKeyUp} 
-          value={this.state.message}
-          className="form-control"
-          id="message"
-          placeholder="write your message here" />
+          type          = 'text' 
+          ref           = 'message'
+          onChange      = {this.handleChange}
+          onKeyUp       = {this.handleKeyUp} 
+          value         = {this.state.message}
+          className     = 'form-control'
+          id            = 'message'
+          placeholder   = 'write your message here' />
     );
   }
 });
