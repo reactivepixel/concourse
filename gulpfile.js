@@ -1,16 +1,56 @@
-var gulp = require('gulp'),     
-	sass = require('gulp-ruby-sass') ,
-	notify = require("gulp-notify") ,
-	bower = require('gulp-bower'),
-	child_process = require('child_process'),
-    nodemon = require('gulp-nodemon'),
-    jshint = require('gulp-jshint');
+'use strict';
+
+var watchify        = require('watchify'),
+    browserify      = require('browserify'),
+    source          = require('vinyl-source-stream'),
+    buffer          = require('vinyl-buffer'),
+    gutil           = require('gulp-util'),
+    sourcemaps      = require('gulp-sourcemaps'),
+    assign          = require('lodash.assign'),
+    reactify        = require('reactify'),
+    gulp            = require('gulp'),     
+    sass            = require('gulp-ruby-sass') ,
+    bower           = require('gulp-bower'),
+    child_process   = require('child_process'),
+    nodemon         = require('gulp-nodemon');
 
 var config = {
-	 sassPath: './app/resources/sass',
-	bowerDir: './bower_components' 
+	 sassPath:   './assets/sass',
+  jsPath:     './assets/js',
+	bowerDir:   './bower_components' 
 }
+ 
+var production = process.env.NODE_ENV === 'production';
 
+// add custom browserify options here
+var customOpts = {
+  entries: ['./assets/js/main.js'],
+  debug: true
+};
+
+var opts  = assign({}, watchify.args, customOpts),
+    b     = watchify(browserify(opts)); 
+
+// add transformations here
+b.transform(reactify);
+
+gulp.task('js', bundle); // so you can run `gulp js` to build the file
+b.on('update', bundle); // on any dep update, runs the bundler
+b.on('log', gutil.log); // output build logs to terminal
+
+function bundle() {
+  return b.bundle()
+    // log errors if they happen
+    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .pipe(source('bundle.js'))
+    // optional, remove if you don't need to buffer file contents
+    .pipe(buffer())
+    // optional, remove if you dont want sourcemaps
+    .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
+       // Add transformation tasks to the pipeline here.
+    .pipe(sourcemaps.write('./')) // writes .map file
+    .pipe(gulp.dest('./public/js'));
+}
 
 // startup required services to run the app server
 gulp.task('mongod', function() { 
@@ -19,11 +59,6 @@ gulp.task('mongod', function() { 
     	console.log(stdout);
     });
 });
-
-gulp.task('lint', function () {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-})
 
 gulp.task('bower', function() { 
     return bower()
@@ -52,7 +87,7 @@ gulp.task('css', function() { 
              loadPath: [
                  config. sassPath,
                  config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
-                 config.bowerDir + '/fontawesome/scss',
+                 config.bowerDir + '/fontawesome/scss'
              ]
          }) 
             .on("error", notify.onError(function (error) {
@@ -66,4 +101,4 @@ gulp.task('css', function() { 
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'icons', 'css', 'mongod', 'dev']);
+  gulp.task('default', ['bower', 'icons', 'css', 'js', 'mongod', 'dev']);

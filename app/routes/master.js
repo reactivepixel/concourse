@@ -1,3 +1,6 @@
+var JSX         = require('node-jsx').install(),
+    React       = require('react'),
+    User        = require('../models/user');
 
 module.exports = function(app, passport) {
 
@@ -5,7 +8,8 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index', {
             name: 'World',
-            page_title: 'SEO Time'
+            page_title: 'SEO Time',
+            markup: 'Did I do that?'
         });
     });
 
