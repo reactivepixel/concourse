@@ -1,8 +1,10 @@
 var socket = io();
 var Flux = DeLorean.Flux;
 
+var haxId = 0
+
 var Messages = Flux.createStore({
-  messages: [{author: "sysop", content: "Initialized"}],
+  messages: [{author: "sysop", content: "Initialized", id:haxId}],
   newMessage: function (message) {
     this.messages.push(message);
     this.emit('change');
@@ -33,10 +35,10 @@ var MessagesDispatcher = Flux.createDispatcher({
 
 var MessageActions = {
   newMessage: function (author, content) {
-    MessagesDispatcher.newMessage({author: author, content: content});
+    MessagesDispatcher.newMessage({author: author, content: content, id: haxId++ });
   },
   sendMessage: function (author, content) {
-    socket.emit('sendMessage', {author: author, content: content});
+    socket.emit('sendMessage', {author: author, content: content, id: haxId++ });
     console.log('Emitting Msg to Server');
   }
 }
@@ -50,21 +52,20 @@ var MessagesView = React.createClass({displayName: 'MessagesView',
   mixins: [Flux.mixins.storeListener],
 
   render: function () {
-    // console.log(this.stores.messageStore.messages);
     var messages = this.stores.messageStore.messages.map(function (message) {
-      return React.DOM.div(null, React.DOM.strong(null, message.author, ": "), React.DOM.span(null, message.content));
+      return (
+        <div key={message.id}>
+          <span><strong>{message.author}: </strong></span>
+          <span>{message.content}</span>
+        </div>
+      );
     });
 
-  //   function(message) {
-  //   return (
-  //     <div>
-  //       <span>{message.sender}</span>
-  //       <span>{message.author}</span>
-  //     </div>
-  //   );
-  // })
-
-    return React.DOM.div(null, messages);
+    return (
+        <div>
+          {messages}
+        </div>
+      );
   }
 });
 
@@ -84,16 +85,26 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
     }
   },
   render: function () {
-    return React.DOM.input({type: "text", 
-                  ref: "message", 
-                  onChange: this.handleChange, 
-                  onKeyUp: this.handleKeyUp, 
-                  value: this.state.message, 
-                  className: "form-control", 
-                  id: "message", placeholder: "write your message here"});
+    return (
+      <input 
+          type="text" 
+          ref="message"
+          onChange={this.handleChange}
+          onKeyUp={this.handleKeyUp} 
+          value={this.state.message}
+          className="form-control"
+          id="message"
+          placeholder="write your message here" />
+    );
   }
 });
 
-React.render(<MessagesView dispatcher={MessagesDispatcher} />, document.getElementById('messages'));
+React.render(
+  <MessagesView dispatcher={MessagesDispatcher} />,
+   document.getElementById('messages')
+  );
 
-React.render(<MessagesSender dispatcher={MessagesDispatcher} />, document.getElementById('sender'));
+React.render(
+  <MessagesSender dispatcher={MessagesDispatcher} />,
+  document.getElementById('sender')
+  );
