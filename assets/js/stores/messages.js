@@ -1,3 +1,5 @@
+var fakeMsgID = 0;
+
 var Messages = Flux.createStore({
   messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
   newMessage: function (message) {
@@ -13,3 +15,5 @@ var Messages = Flux.createStore({
     }
   }
 });
+
+module.exports = Messages;

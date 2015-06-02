@@ -1,8 +1,6 @@
 var socket = io();
 var Flux = DeLorean.Flux;
  
-
- var xxx = require('./login');
 var fakeMsgID = 0
 
 var Messages = Flux.createStore({
