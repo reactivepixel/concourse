@@ -12,7 +12,8 @@ var watchify        = require('watchify'),
     sass            = require('gulp-ruby-sass') ,
     bower           = require('gulp-bower'),
     child_process   = require('child_process'),
-    nodemon         = require('gulp-nodemon');
+    nodemon         = require('gulp-nodemon'),
+    notify          = require("gulp-notify");
 
 var config = {
 	 sassPath:   './assets/sass',
