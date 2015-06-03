@@ -1,5 +1,5 @@
 var socket = io();
-var Flux = DeLorean.Flux;
+var Flux = require('delorean').Flux;
  
 var fakeMsgID = 0
 

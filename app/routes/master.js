@@ -9,7 +9,7 @@ module.exports = function(app, passport) {
         res.render('index', {
             name: 'World',
             page_title: 'SEO Time',
-            markup: 'Did I do that?'
+            markup: ''
         });
     });
 
@@ -45,8 +45,7 @@ module.exports = function(app, passport) {
 
 
     // route /profile
-    app.get('/profile', function(req, res) {
-        console.log('derrrrrrrrrp', req.user);
+    app.get('/profile', userAuthRequired, function(req, res) {
         res.render('profile', {
             name: 'killer',
             message: req.flash('signupMessage'),
@@ -62,8 +61,8 @@ module.exports = function(app, passport) {
     });
 };
 
-// route middleware to make sure
-function isLoggedIn(req, res, next) {
+// route middleware to ensure the user is authenticated
+function userAuthRequired(req, res, next) {
 
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
