@@ -30,7 +30,7 @@ brew install node
 Packages by themselves are nice enhancements to our application but to use some of the packages as tools to manipulate the code of our app and make our lives as devs a bit easier some of the packages need to be ran from the command line, which requires a global npm install.
 
 ```
-sudo npm install -g gulp bower nodev jest
+sudo npm install -g gulp bower nodemon jest
 ```
 
 ### Install MongoDB via Homebrew
