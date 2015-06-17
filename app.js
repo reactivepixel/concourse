@@ -12,7 +12,7 @@ var express 			= require('express'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
 	socketIO 				= require('socket.io');
-
+ 
 require('./app/config/passport')(passport); // pass passport for configuration
 
 // express config
