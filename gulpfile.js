@@ -74,8 +74,7 @@ gulp.task('icons', function() { 
 gulp.task('dev', function () {
   nodemon({ script: 'app.js'
           , ext: 'html js jsx'
-          , ignore: ['ignored.js']
-          , tasks: ['lint'] })
+          , ignore: ['ignored.js'] })
     .on('restart', function () {
       console.log('restarted!')
     })
