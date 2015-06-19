@@ -12,7 +12,7 @@ var Messages = Flux.createStore({
     this.emit('change');
   },
   actions: {
-    'NEW_MESSAGE': 'receiveMessage'
+    'RECEIVE_MESSAGE': 'receiveMessage'
   },
   getState: function() {
     return {
@@ -26,7 +26,7 @@ var messages = Messages;
 //Dispatcher that uses the callback to propagate the information to the store
 var MessagesDispatcher = Flux.createDispatcher({
   receiveMessage: function (message) {
-    this.dispatch('NEW_MESSAGE', message);
+    this.dispatch('RECEIVE_MESSAGE', message);
   },
   getStores: function () {
     return {
