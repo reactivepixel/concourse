@@ -1,17 +1,17 @@
 // npm modules
-var express 			= require('express'),
-	app 						= express(),
-	port 						= process.env.PORT || 3000,
+var express 				= require('express'),
+	app 					= express(),
+	port 					= process.env.PORT || 3000,
   	exphbs 					= require('express-handlebars'),
 	mongoose 				= require('mongoose'),
 	passport				= require('passport'),
-	flash						= require('connect-flash'),
+	flash					= require('connect-flash'),
 	morgan 					= require('morgan'),
-	cookieParser	 	= require('cookie-parser'),
-	bodyParser 			= require('body-parser'),
+	cookieParser	 		= require('cookie-parser'),
+	bodyParser 				= require('body-parser'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
-	Msgs					= require('./app/models/message.js'),
+    Msgs                    = require('./app/models/message.js'),
 	socketIO 				= require('socket.io');
  
 require('./app/config/passport')(passport); // pass passport for configuration
@@ -25,14 +25,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json()); 
 
-
 // View Rendering with Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
 app.set('view engine', 'handlebars');
 
 // Disable etag headers on responses
 app.disable('etag');
-
 
 // required for passport
 app.use(session({ 
