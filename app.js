@@ -2,7 +2,7 @@
 var express 			= require('express'),
 	app 						= express(),
 	port 						= process.env.PORT || 3000,
-  exphbs 					= require('express-handlebars'),
+  	exphbs 					= require('express-handlebars'),
 	mongoose 				= require('mongoose'),
 	passport				= require('passport'),
 	flash						= require('connect-flash'),
@@ -11,7 +11,7 @@ var express 			= require('express'),
 	bodyParser 			= require('body-parser'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
-    Msgs                    = require('./app/models/message.js');
+	Msgs					= require('./app/models/message.js'),
 	socketIO 				= require('socket.io');
  
 require('./app/config/passport')(passport); // pass passport for configuration
@@ -77,5 +77,3 @@ io.on('connection', function (socket){
 	});
 
 });
-
-
