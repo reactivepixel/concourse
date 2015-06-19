@@ -69,7 +69,7 @@ io.on('connection', function (socket){
 	console.log('Connection detected');
 	socket.on('sendMessage', function (payload){
 		console.log('Msg Sent to Server', payload);
-		io.emit('newMessage', payload);
+		io.emit('receiveMessage', payload);
 		console.log('Sending payload to clients\' stores');
 	});
 });

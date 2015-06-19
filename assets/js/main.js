@@ -5,12 +5,12 @@ var fakeMsgID = 0
 
 var Messages = Flux.createStore({
   messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
-  newMessage: function (message) {
+  receiveMessage: function (message) {
     this.messages.push(message);
     this.emit('change');
   },
   actions: {
-    'NEW_MESSAGE': 'newMessage'
+    'RECEIVE_MESSAGE': 'receiveMessage'
   },
   getState: function() {
     return {
@@ -23,8 +23,8 @@ var messages = Messages;
 
 
 var MessagesDispatcher = Flux.createDispatcher({
-  newMessage: function (message) {
-    this.dispatch('NEW_MESSAGE', message);
+  receiveMessage: function (message) {
+    this.dispatch('RECEIVE_MESSAGE', message);
   },
   getStores: function () {
     return {
@@ -34,8 +34,8 @@ var MessagesDispatcher = Flux.createDispatcher({
 });
 
 var MessageActions = {
-  newMessage: function (author, content) {
-    MessagesDispatcher.newMessage({author: author, content: content, id: fakeMsgID++ });
+  receiveMessage: function (author, content) {
+    MessagesDispatcher.receiveMessage({author: author, content: content, id: fakeMsgID++ });
   },
   sendMessage: function (author, content) {
     socket.emit('sendMessage', {author: author, content: content, id: fakeMsgID++ });
@@ -43,8 +43,8 @@ var MessageActions = {
   }
 }
 
-socket.on('newMessage', function (payload) {
-  MessageActions.newMessage(payload.author, payload.content);
+socket.on('receiveMessage', function (payload) {
+  MessageActions.receiveMessage(payload.author, payload.content);
   console.log('Recieved Msg from Server');
 });
 
