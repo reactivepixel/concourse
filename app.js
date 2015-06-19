@@ -72,7 +72,7 @@ io.on('connection', function (socket){
 		console.log('Msg Sent to Server', payload);
 		// grabs message info and sends it to save Message model
 		Msgs.saveMessage(payload['author'],payload['content'],payload['id']);
-		io.emit('newMessage', payload);
+		io.emit('receiveMessage', payload);
 		console.log('Sending payload to clients\' stores');
 	});
 
