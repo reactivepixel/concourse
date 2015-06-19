@@ -2,16 +2,17 @@
 var socket = io();
 var Flux = require('delorean').Flux;
 
-var fakeMsgID = 0
+var fakeMsgID = 0;
 
+//Creates the array where the message will be stored to be grab and handle later.
 var Messages = Flux.createStore({
   messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
-  newMessage: function (message) {
+  receiveMessage: function (message) {
     this.messages.push(message);
     this.emit('change');
   },
   actions: {
-    'NEW_MESSAGE': 'newMessage'
+    'NEW_MESSAGE': 'receiveMessage'
   },
   getState: function() {
     return {
@@ -22,9 +23,9 @@ var Messages = Flux.createStore({
 
 var messages = Messages;
 
-
+//Dispatcher that uses the callback to propagate the information to the store
 var MessagesDispatcher = Flux.createDispatcher({
-  newMessage: function (message) {
+  receiveMessage: function (message) {
     this.dispatch('NEW_MESSAGE', message);
   },
   getStores: function () {
@@ -34,19 +35,18 @@ var MessagesDispatcher = Flux.createDispatcher({
   }
 });
 
+// receives the message and sends the new info to the react create class to be displayed when a message is sent.
 var MessageActions = {
-  newMessage: function (author, content) {
-    MessagesDispatcher.newMessage({author: author, content: content, id: fakeMsgID++ });
+  receiveMessage: function (author, content) {
+    MessagesDispatcher.receiveMessage({author: author, content: content, id: fakeMsgID++ });
   },
   sendMessage: function (author, content) {
     socket.emit('sendMessage', {author: author, content: content, id: fakeMsgID++ });
-    console.log('Emitting Msg to Server');
   }
-}
+};
 
-socket.on('newMessage', function (payload) {
-  MessageActions.newMessage(payload.author, payload.content);
-  console.log('Recieved Msg from Server');
+socket.on('receiveMessage', function (payload) {
+  MessageActions.receiveMessage(payload.author, payload.content, fakeMsgID++ );
 });
 
 var MessagesView = React.createClass({displayName: 'MessagesView',
@@ -101,14 +101,13 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
 });
 
 React.render(
-  React.createElement(MessagesView, {dispatcher: MessagesDispatcher}),
-   document.getElementById('messages')
-  );
-
+    React.createElement(MessagesView, {dispatcher: MessagesDispatcher}),
+    document.getElementById('messages')
+);
 React.render(
   React.createElement(MessagesSender, {dispatcher: MessagesDispatcher}),
   document.getElementById('sender')
-  );
+);
 
 },{"delorean":14}],2:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
