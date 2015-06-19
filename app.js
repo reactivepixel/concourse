@@ -2,7 +2,7 @@
 var express 			= require('express'),
 	app 						= express(),
 	port 						= process.env.PORT || 3000,
-  exphbs 					= require('express-handlebars'),
+  	exphbs 					= require('express-handlebars'),
 	mongoose 				= require('mongoose'),
 	passport				= require('passport'),
 	flash						= require('connect-flash'),

@@ -2,6 +2,9 @@ var JSX         = require('node-jsx').install(),
     React       = require('react'),
     User        = require('../models/user');
 
+
+
+
 module.exports = function(app, passport) {
 
     // route /
@@ -36,7 +39,8 @@ module.exports = function(app, passport) {
             message: req.flash('signupMessage')
         });
     });
-    // process the signup form
+    // process the signup form  socket.on('sendMessage', function (payload){
+
         app.post('/signup', passport.authenticate('local-signup', {
             successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
@@ -46,6 +50,7 @@ module.exports = function(app, passport) {
 
     // route /profile
     app.get('/profile', userAuthRequired, function(req, res) {
+        console.log(req.user);
         res.render('profile', {
             name: 'killer',
             message: req.flash('signupMessage'),
