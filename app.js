@@ -11,6 +11,7 @@ var express 			= require('express'),
 	bodyParser 			= require('body-parser'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
+	Msgs					= require('./app/models/message.js'),
 	socketIO 				= require('socket.io');
  
 require('./app/config/passport')(passport); // pass passport for configuration
