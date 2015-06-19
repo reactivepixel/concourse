@@ -2,7 +2,6 @@ var socket = io();
 var Flux = require('delorean').Flux;
 
 var fakeMsgID = 0;
-
 //Creates the array where the message will be stored to be grab and handle later.
 var Messages = Flux.createStore({
   messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
@@ -21,8 +20,6 @@ var Messages = Flux.createStore({
 });
 
 var messages = Messages;
-
-//Dispatcher that uses the callback to propagate the information to the store
 var MessagesDispatcher = Flux.createDispatcher({
   receiveMessage: function (message) {
     this.dispatch('RECEIVE_MESSAGE', message);
@@ -104,6 +101,6 @@ React.render(
     document.getElementById('messages')
 );
 React.render(
-  <MessagesSender dispatcher={MessagesDispatcher} />,
-  document.getElementById('sender')
+    <MessagesSender dispatcher={MessagesDispatcher} />,
+    document.getElementById('sender')
 );
