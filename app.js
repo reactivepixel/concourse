@@ -70,20 +70,12 @@ io.on('connection', function (socket){
 	console.log('Connection detected');
 	socket.on('sendMessage', function (payload){
 		console.log('Msg Sent to Server', payload);
+		// grabs message info and sends it to save Message model
 		Msgs.saveMessage(payload['author'],payload['content'],payload['id']);
 		io.emit('newMessage', payload);
 		console.log('Sending payload to clients\' stores');
 	});
 
 });
-
-// io.on('connection', function (socket){
-// 	console.log('Connection detected');
-// 	socket.on('sendMessage', function (payload){
-// 		console.log('Msg Sent2 to Server', payload);
-
-// 	});
-
-// });
 
 
