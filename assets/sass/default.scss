@@ -15,6 +15,12 @@ $font-family-base: 'Raleway', sans-serif;
 // ---------- 4: General
 // ---------- 5: Header
 // ---------- 6: Index
+// ---------- 7: Messages
+// ---------- 8: Scroll bar
+// ---------- 9: Inputs
+// --------- 10: Media queries
+// --------- 11: Grid System
+
 // ----------------------------------------
 
 // ---------- 1: Typography -------------------
@@ -32,7 +38,7 @@ $white-hover 			: rgba(207,216,220 ,1);
 $red 					: rgba(239,83,80 ,1);
 $blue 					: rgba(33,150,243 ,1);
 $green 					: rgba(76,175,80 ,1);
-$orange 				: rrgba(255,152,0 ,1);
+$orange 				: rgba(255,152,0 ,1);
 
 $box-shadow		 		: 2px 2px 3px rgba(0,0,0,0.3);
 $button-box-shadow 		: 0px 2px 3px rgba(0,0,0,0.3);
@@ -309,7 +315,7 @@ select#msg_channel_id{
 		font-size: 16pt;
 	}
 }
-
+// ---------- 10: Media queries ------------
 $xsmall : 768px;
 
 @media screen and (max-width: $xsmall) {
@@ -364,13 +370,22 @@ $xsmall : 768px;
 
 }
 
+// ---------- 11: Grid System ------------
+
+.row {
+  margin: 0 auto;
+  max-width: 62.5rem;
+  width: 100%;
+}
+.row:before, .row:after {
+  content: " ";
+  display: table;
+}
+.row:after {
+  clear: both;
+}
+
 // Material Design Colors - http://www.materialui.co/colors
-
-
-
-
-
-
 /////////////////////////////////////
 h1, h2, h3{
 	font-family 		: 'Open Sans', sans-serif;

@@ -1,18 +1,19 @@
 // npm modules
-var express 			= require('express'),
-	app 						= express(),
-	port 						= process.env.PORT || 3000,
-  exphbs 					= require('express-handlebars'),
+var express 				= require('express'),
+	app 					= express(),
+	port 					= process.env.PORT || 3000,
+  	exphbs 					= require('express-handlebars'),
 	mongoose 				= require('mongoose'),
 	passport				= require('passport'),
-	flash						= require('connect-flash'),
+	flash					= require('connect-flash'),
 	morgan 					= require('morgan'),
-	cookieParser	 	= require('cookie-parser'),
-	bodyParser 			= require('body-parser'),
+	cookieParser	 		= require('cookie-parser'),
+	bodyParser 				= require('body-parser'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
+    Msgs                    = require('./app/models/message.js'),
 	socketIO 				= require('socket.io');
-
+ 
 require('./app/config/passport')(passport); // pass passport for configuration
 
 // express config
@@ -69,7 +70,10 @@ io.on('connection', function (socket){
 	console.log('Connection detected');
 	socket.on('sendMessage', function (payload){
 		console.log('Msg Sent to Server', payload);
-		io.emit('newMessage', payload);
+		// grabs message info and sends it to save Message model
+		Msgs.saveMessage(payload['author'],payload['content'],payload['id']);
+		io.emit('receiveMessage', payload);
 		console.log('Sending payload to clients\' stores');
 	});
+
 });
