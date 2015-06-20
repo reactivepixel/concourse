@@ -11,7 +11,7 @@ var express 			= require('express'),
 	bodyParser 			= require('body-parser'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
-    Msgs                    = require('./app/models/message.js'),
+    Msg                    = require('./app/models/msg.js'),
 	socketIO 				= require('socket.io');
  
 require('./app/config/passport')(passport); // pass passport for configuration
@@ -71,7 +71,7 @@ io.on('connection', function (socket){
 	socket.on('sendMessage', function (payload){
 		console.log('Msg Sent to Server', payload);
 		// grabs message info and sends it to save Message model
-		Msgs.saveMessage(payload['author'],payload['content'],payload['id']);
+		Msg.saveMessage(payload['author'],payload['content'],payload['id']);
 		io.emit('receiveMessage', payload);
 		console.log('Sending payload to clients\' stores');
 	});
