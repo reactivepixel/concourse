@@ -3,7 +3,7 @@ var bodyParser  = require('body-parser');
 
 
 // Models
-var Msgs = require('../../models/msg');
+//var Msgs = require('../../models/msg');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST

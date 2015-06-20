@@ -1,8 +1,8 @@
 var socket = io();
 var Flux = require('delorean').Flux;
 
-var fakeMsgID = 0
-
+var fakeMsgID = 0;
+//Creates the array where the message will be stored to be grab and handle later.
 var Messages = Flux.createStore({
   messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
   receiveMessage: function (message) {
@@ -20,8 +20,6 @@ var Messages = Flux.createStore({
 });
 
 var messages = Messages;
-
-
 var MessagesDispatcher = Flux.createDispatcher({
   receiveMessage: function (message) {
     this.dispatch('RECEIVE_MESSAGE', message);
@@ -33,19 +31,18 @@ var MessagesDispatcher = Flux.createDispatcher({
   }
 });
 
+// receives the message and sends the new info to the react create class to be displayed when a message is sent.
 var MessageActions = {
   receiveMessage: function (author, content) {
     MessagesDispatcher.receiveMessage({author: author, content: content, id: fakeMsgID++ });
   },
   sendMessage: function (author, content) {
     socket.emit('sendMessage', {author: author, content: content, id: fakeMsgID++ });
-    console.log('Emitting Msg to Server');
   }
-}
+};
 
 socket.on('receiveMessage', function (payload) {
-  MessageActions.receiveMessage(payload.author, payload.content);
-  console.log('Recieved Msg from Server');
+  MessageActions.receiveMessage(payload.author, payload.content, fakeMsgID++ );
 });
 
 var MessagesView = React.createClass({displayName: 'MessagesView',
@@ -100,11 +97,10 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
 });
 
 React.render(
-  <MessagesView dispatcher={MessagesDispatcher} />,
-   document.getElementById('messages')
-  );
-
+    <MessagesView dispatcher={MessagesDispatcher} />,
+    document.getElementById('messages')
+);
 React.render(
-  <MessagesSender dispatcher={MessagesDispatcher} />,
-  document.getElementById('sender')
-  );
+    <MessagesSender dispatcher={MessagesDispatcher} />,
+    document.getElementById('sender')
+);
