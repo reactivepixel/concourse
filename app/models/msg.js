@@ -24,8 +24,7 @@ exports.saveMessage = function(user,content,channelID){
 		
 	});
 	// console.log user and channel ID
-	console.log('user and channel Id');
-	console.log(user+channelID);
+	console.log('channel id: ', channelID));
 
 	// Saves message
     saveMessage.save(function(err) {
