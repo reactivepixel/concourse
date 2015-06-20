@@ -25,7 +25,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json()); 
 
-
 // View Rendering with Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
 app.set('view engine', 'handlebars');
@@ -69,11 +68,10 @@ var io = socketIO.listen(server);
 io.on('connection', function (socket){
 	console.log('Connection detected');
 	socket.on('sendMessage', function (payload){
-		console.log('Msg Sent to Server', payload);
-		// grabs message info and sends it to save Message model
-		Msg.saveMessage(payload['author'],payload['content'],payload['id']);
-		io.emit('receiveMessage', payload);
-		console.log('Sending payload to clients\' stores');
+	console.log('Msg Sent to Server', payload);
+	// grabs message info and sends it to save Message model
+	Msg.saveMessage(payload['author'],payload['content'],payload['id']);
+	io.emit('receiveMessage', payload);
+	console.log('Sending payload to clients\' stores');
 	});
-
 });

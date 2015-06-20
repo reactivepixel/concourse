@@ -15,8 +15,6 @@ var messageModel = mongoose.model('concourse', MsgSchema)
 
 exports.saveMessage = function(user,content,channelID){
 
-	console.log(user+channelID);
-
 	// // creates a new message with the shema in Msg models
 	var saveMessage   = new messageModel({
 
@@ -25,9 +23,9 @@ exports.saveMessage = function(user,content,channelID){
 		channel_id:channelID
 		
 	});
-
-	console.log('Hello models');
-	console.log(saveMessage);
+	// console.log user and channel ID
+	console.log('user and channel Id');
+	console.log(user+channelID);
 
 	// Saves message
     saveMessage.save(function(err) {
