@@ -11,7 +11,7 @@ var MsgSchema   = mongoose.Schema({
 });
 
 // ========= Methods ============
-var messageModel = mongoose.model('concourse', MsgSchema)
+var messageModel = mongoose.model('msgs', MsgSchema)
 
 exports.saveMessage = function(user,content,channelID){
 
