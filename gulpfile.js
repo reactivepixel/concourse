@@ -19,7 +19,7 @@ var config = {
 	 sassPath:   './assets/sass',
   jsPath:     './assets/js',
 	bowerDir:   './bower_components' 
-}
+};
  
 var production = process.env.NODE_ENV === 'production';
 
@@ -78,7 +78,7 @@ gulp.task('dev', function () {
     .on('restart', function () {
       console.log('restarted!')
     })
-})
+});
 
 gulp.task('css', function() { 
     return gulp.src(config.sassPath + '/default.scss')
@@ -101,4 +101,4 @@ gulp.task('css', function() { 
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'icons', 'css', 'js', 'mongod', 'dev']);
+  gulp.task('default', ['bower', 'icons', 'css', 'js', 'mongod', 'dev','watch']);

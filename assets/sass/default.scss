@@ -2,9 +2,10 @@
 $font-family-base: 'Raleway', sans-serif;
 // Import bootstrap and fontawesome
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
-@import "bootstrap-sprockets";
-@import "bootstrap";
+//@import "bootstrap-sprockets";
+//@import "bootstrap";
 
+@import "meyer_reset";
 @import "font-awesome";
 
 
@@ -15,7 +16,7 @@ $font-family-base: 'Raleway', sans-serif;
 // ---------- 2: Colors & other variables
 // ---------- 3: Organisms
 // ---------- 4: General
-// ---------- 5: Header
+// ---------- 5: Header / Navigation
 // ---------- 6: Index
 // ---------- 7: Messages
 // ---------- 8: Scroll bar
@@ -50,7 +51,8 @@ $border-radius 			: 2px;
 // ---------- 3: Organisms ---------------------
 h1, h2, h3{
 	font-family 		: $opensans;
-	font-weight 		: 400;
+  	font-weight 		: 300;
+  	color 				: rgba(97,97,97 ,1);
 }
 h4, h5, h6, li, a, label {
 	font-family 		: $opensans;
@@ -77,35 +79,37 @@ body{
 
 
 // ---------- 4: General --------------------------
-.navbar{
-	background-color: $white;
-	box-shadow 			: 0px 2px 2px rgba(0,0,0,0.2);
-	border-radius 		: 0px !important;
 
-	a{
-		color: $grey;
-		&:hover{
-			color: $grey-light;
-			background-color: transparent !important;
-		}	
-	}
-}
-.alert{
-	border-radius: 0 !important;
-	color: $grey !important;
-}
-#main_content{
-	margin-bottom: 20px;
-}
-a[href="#top"]{
-	background-color: #efefef;
-	margin-top: 10px;
-	text-decoration: none;
-	padding: 10px;
-	border-radius: $border-radius;
+
+// ---------- 5: Header / Navigation --------------------------
+header{
+  text-align: center;
+  font-size: 42px;
+  line-height: 60px;
+  height: 60px;
+  background: #335C7D;
+  color: #fff;
+  font-family: 'PT Sans', sans-serif;
+
+  // set animation
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  h1{
+	color:white;
+  }
 }
 
-// ---------- 5: Header --------------------------
+header.sticky {
+  position: fixed;
+  font-size: 24px;
+  line-height: 48px;
+  height: 48px;
+  width: 100%;
+  background: #efc47D;
+  text-align: left;
+  padding-left: 20px;
+}
+
 #logo{
 	a{
 		font-family: $railway;
@@ -125,7 +129,6 @@ a[href="#top"]{
 		background-color: $blue !important;
 	}
 }
-
 // ---------- 6: Index --------------------------
 article{
 	h3{
@@ -389,12 +392,6 @@ $xsmall : 768px;
 
 // Material Design Colors - http://www.materialui.co/colors
 /////////////////////////////////////
-h1, h2, h3{
-	font-family 		: 'Open Sans', sans-serif;
-	font-weight 		: 300;
-	color 				: rgba(97,97,97 ,1);
-}
-
 .channel_form_slide, .form_slide, {
 	margin-top: 20px;
 }
