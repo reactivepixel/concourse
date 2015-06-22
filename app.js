@@ -25,14 +25,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json()); 
 
-
 // View Rendering with Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
 app.set('view engine', 'handlebars');
 
 // Disable etag headers on responses
 app.disable('etag');
-
 
 // required for passport
 app.use(session({ 
