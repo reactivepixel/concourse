@@ -3,7 +3,6 @@ var Schema       = mongoose.Schema;
 
 var MsgSchema   = mongoose.Schema({
     content: String,
-    // _user_id: Schema.Types.ObjectId,
     user: String,
     channel_id: { type: Number },
     created_at: { type: Date, default: Date.now },
@@ -21,7 +20,7 @@ exports.saveMessage = function(user,content,channelID){
 		content: content,
 		user:user,
 		channel_id:channelID
-		
+
 	});
 	// console.log user and channel ID
 	console.log('channel id: ', channelID);
