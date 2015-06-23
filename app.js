@@ -12,6 +12,7 @@ var express 				= require('express'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
     Msg                    = require('./app/models/msg.js'),
+    gUser                    = require('./app/models/user.js'),
 	socketIO 				= require('socket.io');
  
 require('./app/config/passport')(passport); // pass passport for configuration
@@ -68,9 +69,15 @@ var io = socketIO.listen(server);
 io.on('connection', function (socket){
 	console.log('Connection detected');
 	socket.on('sendMessage', function (payload){
+
 	console.log('Msg Sent to Server', payload);
+	var userLoggedIn = gUser.getSession();
+	console.log('user logged in ' + userLoggedIn);
+	payload['author'] = userLoggedIn;
 	// grabs message info and sends it to save Message model
 	Msg.saveMessage(payload['author'],payload['content'],payload['id']);
+
+
 	io.emit('receiveMessage', payload);
 	console.log('Sending payload to clients\' stores');
 	});
