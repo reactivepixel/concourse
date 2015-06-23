@@ -16,13 +16,13 @@
       </div>
     </div>
   </div>
-
-<form action="/hello2" method="POST">
-
-<input type="text" name="theme">
-<input type="submit">
-
-</form>
-
-  
+  <form action="/saveTheme" method="POST">
+    <label for="default">Default</label>
+    <input type="radio" name="theme" value="default">
+    <label for="red-theme">Red</label>
+    <input type="radio" name="theme" value="red-theme">
+    <label for="blue-theme">Blue</label>
+    <input type="radio" name="theme" value="blue-theme">
+    <input type="submit">
+  </form>
 </div>

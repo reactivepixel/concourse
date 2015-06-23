@@ -2,9 +2,6 @@ var JSX         = require('node-jsx').install(),
     React       = require('react'),
     User        = require('../models/user');
 
-
-
-
 module.exports = function(app, passport) {
 
     // route /
@@ -53,8 +50,10 @@ module.exports = function(app, passport) {
             message: req.flash('signupMessage')
         });
     });
-    app.post('/hello2', function(req, res) {
-        console.log('Hello POst');
+    app.post('/saveTheme', userAuthRequired, function(req, res) {
+        console.log(req.body);
+        console.log('theme: '+req.body.theme);
+        User.saveTheme(req.user.local.email,req.body.theme);
         res.redirect('/profile');
     });
     // route /profile
