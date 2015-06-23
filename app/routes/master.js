@@ -62,7 +62,8 @@ module.exports = function(app, passport) {
         res.render('profile', {
             name: 'killer',
             message: req.flash('signupMessage'),
-            user : req.user // get the user out of session and pass to template
+            user : req.user
+             // get the user out of session and pass to template
         });
     });
     // =====================================

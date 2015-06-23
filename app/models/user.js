@@ -8,8 +8,7 @@ var userSchema = mongoose.Schema({
 
     local            : {
         email        : String,
-        password     : String,
-        theme        : String
+        password     : String
     },
     facebook         : {
         id           : String,
@@ -67,33 +66,16 @@ module.exports.getSession = function(){
 };
 
 module.exports.saveTheme = function(user,theme){
-  /*
-	// // creates a new message with the shema in Msg models
-	var saveTheme = new userModel({
-		preferences: {
-      theme: theme
+  userModel.update({
+    'local.email':user
+  },{
+    $set:{
+      'preferences.theme':theme
     }
-	});
-
-
-
-	// Saves theme
-  saveTheme.save(function(err) {
-  	console.log(err);
+  }, function(err,kittens){
+    if(err) return console.error(err);
+      console.log(kittens);
   });
-  */
-  userModel.update(
-    {
-      'local.email':user
-    },{
-      $set:{
-        'preferences.theme':theme
-      }
-    }, function(err,kittens){
-      if(err) return console.error(err);
-        console.log(kittens);
-    }
-  );
 
   console.log('DB email:',user);
 	console.log('DB theme:',theme);
