@@ -17,7 +17,7 @@ var watchify        = require('watchify'),
 
 var config = {
 	 sassPath:   './assets/sass',
-  jsPath:     './assets/js',
+    jsPath:     './assets/js',
 	bowerDir:   './bower_components' 
 };
  
@@ -25,7 +25,7 @@ var production = process.env.NODE_ENV === 'production';
 
 // add custom browserify options here
 var customOpts = {
-  entries: ['./assets/js/main.js'],
+  entries: ['./assets/js/main.js','./assets/js/frontPage.js'],
   debug: true
 };
 

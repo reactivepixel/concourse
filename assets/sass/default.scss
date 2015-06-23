@@ -89,13 +89,14 @@ header{
   height: 60px;
   background: #335C7D;
   color: #fff;
-  font-family: 'PT Sans', sans-serif;
-
   // set animation
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   h1{
 	color:white;
+	font-family: $railway;
+	font-weight: 700;
+
   }
 }
 
