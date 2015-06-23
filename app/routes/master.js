@@ -47,10 +47,19 @@ module.exports = function(app, passport) {
             failureFlash : true // allow flash messages
         }));
 
-
+    app.get('/hello', function(req, res) {
+        res.render('form', {
+            name: 'killer',
+            message: req.flash('signupMessage')
+        });
+    });
+    app.post('/hello2', function(req, res) {
+        console.log('Hello POst');
+        res.redirect('/profile');
+    });
     // route /profile
     app.get('/profile', userAuthRequired, function(req, res) {
-        console.log(req.user);
+        User.saveSession(req.user.local.email);
         res.render('profile', {
             name: 'killer',
             message: req.flash('signupMessage'),
