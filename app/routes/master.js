@@ -1,10 +1,6 @@
 var JSX         = require('node-jsx').install(),
     React       = require('react'),
-    port        = process.env.PORT || 3000,
-    socketIO    = require('socket.io'),
     User        = require('../models/user');
-
-
 
 module.exports = function(app, passport) {
 
@@ -55,9 +51,10 @@ module.exports = function(app, passport) {
             message: req.flash('signupMessage')
         });
     });
-
-    app.post('/hello2', function(req, res) {
-        console.log('Hello POst');
+    app.post('/saveTheme', userAuthRequired, function(req, res) {
+        console.log(req.body);
+        console.log('theme: '+req.body.theme);
+        User.saveTheme(req.user.local.email,req.body.theme);
         res.redirect('/profile');
     });
     // route /profile
@@ -65,7 +62,8 @@ module.exports = function(app, passport) {
         res.render('profile', {
             name: 'killer',
             message: req.flash('signupMessage'),
-            user : req.user // get the user out of session and pass to template
+            user : req.user
+             // get the user out of session and pass to template
         });
     });
     // =====================================

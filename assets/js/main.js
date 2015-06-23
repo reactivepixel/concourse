@@ -6,6 +6,7 @@ var userN = document.getElementById("userEmail").innerHTML;
 
 
 var fakeMsgID = 0;
+
 //Creates the array where the message will be stored to be grab and handle later.
 var Messages = Flux.createStore({
   messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
@@ -24,6 +25,7 @@ var Messages = Flux.createStore({
 });
 
 var messages = Messages;
+
 var MessagesDispatcher = Flux.createDispatcher({
   receiveMessage: function (message) {
     this.dispatch('RECEIVE_MESSAGE', message);
@@ -87,11 +89,11 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   },
   render: function () {
     return (
-      <input 
-          type          = 'text' 
+      <input
+          type          = 'text'
           ref           = 'message'
           onChange      = {this.handleChange}
-          onKeyUp       = {this.handleKeyUp} 
+          onKeyUp       = {this.handleKeyUp}
           value         = {this.state.message}
           className     = 'form-control'
           id            = 'message'
@@ -105,6 +107,6 @@ React.render(
     document.getElementById('messages')
 );
 React.render(
-    <MessagesSender dispatcher={MessagesDispatcher} />,
-    document.getElementById('sender')
+  <MessagesSender dispatcher={MessagesDispatcher} />,
+  document.getElementById('sender')
 );
