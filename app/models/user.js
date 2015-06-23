@@ -66,8 +66,8 @@ module.exports.getSession = function(){
 
 };
 
-module.exports.saveTheme = function(theme){
-
+module.exports.saveTheme = function(user,theme){
+  /*
 	// // creates a new message with the shema in Msg models
 	var saveTheme = new userModel({
 		preferences: {
@@ -75,12 +75,26 @@ module.exports.saveTheme = function(theme){
     }
 	});
 
-	// console.log user and channel ID
-	console.log('DB theme: ', theme);
+
 
 	// Saves theme
   saveTheme.save(function(err) {
   	console.log(err);
   });
+  */
+  userModel.update(
+    {
+      'local.email':user
+    },{
+      $set:{
+        'preferences.theme':theme
+      }
+    }, function(err,kittens){
+      if(err) return console.error(err);
+        console.log(kittens);
+    }
+  );
 
+  console.log('DB email:',user);
+	console.log('DB theme:',theme);
 };

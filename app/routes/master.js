@@ -50,10 +50,10 @@ module.exports = function(app, passport) {
             message: req.flash('signupMessage')
         });
     });
-    app.post('/saveTheme', function(req, res) {
+    app.post('/saveTheme', userAuthRequired, function(req, res) {
         console.log(req.body);
         console.log('theme: '+req.body.theme);
-        User.saveTheme(req.body.theme);
+        User.saveTheme(req.user.local.email,req.body.theme);
         res.redirect('/profile');
     });
     // route /profile
