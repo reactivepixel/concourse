@@ -9,6 +9,7 @@ var userSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
+        theme        : String
     },
     facebook         : {
         id           : String,
@@ -27,8 +28,10 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
+    },
+    preferences      : {
+        theme        : String
     }
-
 });
 
 // methods ======================
@@ -42,6 +45,9 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
+// add theme
+var userModel = mongoose.model('User', userSchema);
+
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
 
@@ -49,7 +55,7 @@ module.exports = mongoose.model('User', userSchema);
 var sessionVar;
 
 module.exports.saveSession = function(user){
-    
+
     console.log('saving');
     sessionVar = user;
 
@@ -57,5 +63,24 @@ module.exports.saveSession = function(user){
 module.exports.getSession = function(){
 
     return sessionVar;
+
+};
+
+module.exports.saveTheme = function(theme){
+
+	// // creates a new message with the shema in Msg models
+	var saveTheme = new userModel({
+		preferences: {
+      theme: theme
+    }
+	});
+
+	// console.log user and channel ID
+	console.log('DB theme: ', theme);
+
+	// Saves theme
+  saveTheme.save(function(err) {
+  	console.log(err);
+  });
 
 };

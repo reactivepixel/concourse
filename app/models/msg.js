@@ -1,5 +1,4 @@
 var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
 
 var MsgSchema   = mongoose.Schema({
     content: String,

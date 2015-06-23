@@ -2,9 +2,6 @@ var JSX         = require('node-jsx').install(),
     React       = require('react'),
     User        = require('../models/user');
 
-
-
-
 module.exports = function(app, passport) {
 
     // route /
@@ -56,6 +53,7 @@ module.exports = function(app, passport) {
     app.post('/saveTheme', function(req, res) {
         console.log(req.body);
         console.log('theme: '+req.body.theme);
+        User.saveTheme(req.body.theme);
         res.redirect('/profile');
     });
     // route /profile
