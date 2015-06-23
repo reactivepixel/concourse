@@ -53,8 +53,9 @@ module.exports = function(app, passport) {
             message: req.flash('signupMessage')
         });
     });
-    app.post('/hello2', function(req, res) {
-        console.log('Hello POst');
+    app.post('/saveTheme', function(req, res) {
+        console.log(req.body);
+        console.log('theme: '+req.body.theme);
         res.redirect('/profile');
     });
     // route /profile
