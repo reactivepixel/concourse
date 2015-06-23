@@ -1,11 +1,13 @@
 var JSX         = require('node-jsx').install(),
     React       = require('react'),
+    port        = process.env.PORT || 3000,
+    socketIO    = require('socket.io'),
     User        = require('../models/user');
 
 
 
-
 module.exports = function(app, passport) {
+
 
     // route /
     app.get('/', function(req, res) {
@@ -53,13 +55,13 @@ module.exports = function(app, passport) {
             message: req.flash('signupMessage')
         });
     });
+
     app.post('/hello2', function(req, res) {
         console.log('Hello POst');
         res.redirect('/profile');
     });
     // route /profile
     app.get('/profile', userAuthRequired, function(req, res) {
-        User.saveSession(req.user.local.email);
         res.render('profile', {
             name: 'killer',
             message: req.flash('signupMessage'),

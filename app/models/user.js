@@ -44,18 +44,3 @@ userSchema.methods.validPassword = function(password) {
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
-
-// get user's session info ======================
-var sessionVar;
-
-module.exports.saveSession = function(user){
-    
-    console.log('saving');
-    sessionVar = user;
-
-};
-module.exports.getSession = function(){
-
-    return sessionVar;
-
-};
