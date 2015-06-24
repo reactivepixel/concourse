@@ -3,6 +3,20 @@ var Flux = require('delorean').Flux;
 
 var fakeMsgID = 0;
 
+
+// var for user's email after ajax call
+var userEmail;
+
+
+// Grabs user Email from the getUser route
+$.ajax({
+ url: '/getEmail',
+ method: 'GET',
+ success: function(data){
+   userEmail = data;
+ }
+});
+
 //Creates the array where the message will be stored to be grab and handle later.
 var Messages = Flux.createStore({
   messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
@@ -79,7 +93,7 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   handleKeyUp: function (e) {
     if (e.keyCode == 13) {
       var message = this.state.message;
-      MessageActions.sendMessage('someone', message);
+      MessageActions.sendMessage(userEmail, message);
       this.setState({message: ''});
     }
   },

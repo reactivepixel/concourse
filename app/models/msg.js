@@ -1,5 +1,4 @@
 var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
 
 var MsgSchema   = mongoose.Schema({
     content: String,
@@ -10,7 +9,7 @@ var MsgSchema   = mongoose.Schema({
 });
 
 // ========= Methods ============
-var messageModel = mongoose.model('msgs', MsgSchema)
+var messageModel = mongoose.model('msgs', MsgSchema);
 
 exports.saveMessage = function(user,content,channelID){
 
@@ -27,8 +26,10 @@ exports.saveMessage = function(user,content,channelID){
 
 	// Saves message
     saveMessage.save(function(err) {
-    	console.log(err);
-
+    	
+    	if(err){
+     		console.log(err);   		
+    	}
     });
 
 };

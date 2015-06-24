@@ -1,19 +1,19 @@
 // npm modules
-var express 				= require('express'),
-	app 					= express(),
-	port 					= process.env.PORT || 3000,
-  	exphbs 					= require('express-handlebars'),
+var express 			= require('express'),
+	app 						= express(),
+	port 						= process.env.PORT || 3000,
+  exphbs 					= require('express-handlebars'),
 	mongoose 				= require('mongoose'),
 	passport				= require('passport'),
-	flash					= require('connect-flash'),
+	flash						= require('connect-flash'),
 	morgan 					= require('morgan'),
-	cookieParser	 		= require('cookie-parser'),
-	bodyParser 				= require('body-parser'),
+	cookieParser	 	= require('cookie-parser'),
+	bodyParser 			= require('body-parser'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
-    Msg                    = require('./app/models/msg.js'),
+  Msg             = require('./app/models/msg.js'),
 	socketIO 				= require('socket.io');
- 
+
 require('./app/config/passport')(passport); // pass passport for configuration
 
 // express config
@@ -23,7 +23,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 
 // View Rendering with Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
@@ -34,11 +34,11 @@ app.disable('etag');
 
 
 // required for passport
-app.use(session({ 
+app.use(session({
 	secret: 'WhatsMyAgeAgain', // session secret
 	resave: true,
-	saveUninitialized: true 
-})); 
+	saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -68,10 +68,11 @@ var io = socketIO.listen(server);
 io.on('connection', function (socket){
 	console.log('Connection detected');
 	socket.on('sendMessage', function (payload){
-	console.log('Msg Sent to Server', payload);
-	// grabs message info and sends it to save Message model
-	Msg.saveMessage(payload['author'],payload['content'],payload['id']);
+
+	// saves messages to the database with the messages model
+	Msg.saveMessage(payload.author.email,payload.content,payload.id);
+	
 	io.emit('receiveMessage', payload);
-	console.log('Sending payload to clients\' stores');
+		console.log('Sending payload to clients\' stores');
 	});
 });
