@@ -68,9 +68,10 @@ var io = socketIO.listen(server);
 io.on('connection', function (socket){
 	console.log('Connection detected');
 	socket.on('sendMessage', function (payload){
-		
+
 	// saves messages to the database with the messages model
-	Msg.saveMessage(payload.author,payload.content,payload.id);
+	Msg.saveMessage(payload.author.email,payload.content,payload.id);
+	
 	io.emit('receiveMessage', payload);
 		console.log('Sending payload to clients\' stores');
 	});

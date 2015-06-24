@@ -58,7 +58,7 @@ module.exports = function(app, passport) {
         res.redirect('/profile');
     });
 
-    app.get('/getEmail', function(req, res) {
+    app.get('/getEmail', userAuthRequired, function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ email: req.user.local.email}, null, 3));
     }); 
