@@ -2,16 +2,31 @@
 var socket = io();
 var Flux = require('delorean').Flux;
 
-var fakeMsgID = 0
+var fakeMsgID = 0;
 
+
+// var for user's name after ajax call
+var userName;
+
+
+// Grabs user name from the getUser route
+$.ajax({
+ url: '/getName',
+ method: 'GET',
+ success: function(data){
+   userName = data;
+ }
+});
+
+//Creates the array where the message will be stored to be grab and handle later.
 var Messages = Flux.createStore({
   messages: [{author: "sysop", content: "Initialized", id:fakeMsgID}],
-  newMessage: function (message) {
+  receiveMessage: function (message) {
     this.messages.push(message);
     this.emit('change');
   },
   actions: {
-    'NEW_MESSAGE': 'newMessage'
+    'RECEIVE_MESSAGE': 'receiveMessage'
   },
   getState: function() {
     return {
@@ -22,10 +37,9 @@ var Messages = Flux.createStore({
 
 var messages = Messages;
 
-
 var MessagesDispatcher = Flux.createDispatcher({
-  newMessage: function (message) {
-    this.dispatch('NEW_MESSAGE', message);
+  receiveMessage: function (message) {
+    this.dispatch('RECEIVE_MESSAGE', message);
   },
   getStores: function () {
     return {
@@ -34,19 +48,18 @@ var MessagesDispatcher = Flux.createDispatcher({
   }
 });
 
+// receives the message and sends the new info to the react create class to be displayed when a message is sent.
 var MessageActions = {
-  newMessage: function (author, content) {
-    MessagesDispatcher.newMessage({author: author, content: content, id: fakeMsgID++ });
+  receiveMessage: function (author, content) {
+    MessagesDispatcher.receiveMessage({author: author, content: content, id: fakeMsgID++ });
   },
   sendMessage: function (author, content) {
     socket.emit('sendMessage', {author: author, content: content, id: fakeMsgID++ });
-    console.log('Emitting Msg to Server');
   }
-}
+};
 
-socket.on('newMessage', function (payload) {
-  MessageActions.newMessage(payload.author, payload.content);
-  console.log('Recieved Msg from Server');
+socket.on('receiveMessage', function (payload) {
+  MessageActions.receiveMessage(payload.author, payload.content, fakeMsgID++ );
 });
 
 var MessagesView = React.createClass({displayName: 'MessagesView',
@@ -81,7 +94,7 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   handleKeyUp: function (e) {
     if (e.keyCode == 13) {
       var message = this.state.message;
-      MessageActions.sendMessage('someone', message);
+      MessageActions.sendMessage(userName, message);
       this.setState({message: ''});
     }
   },
@@ -95,22 +108,39 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
           value: this.state.message, 
           className: "form-control", 
           id: "message", 
-          placeholder: "write your message here"})
+          placeholder: "write your message here", 
+          require: true})
+
+
     );
   }
 });
 
 React.render(
-  React.createElement(MessagesView, {dispatcher: MessagesDispatcher}),
-   document.getElementById('messages')
-  );
-
+    React.createElement(MessagesView, {dispatcher: MessagesDispatcher}),
+    document.getElementById('messages')
+);
 React.render(
   React.createElement(MessagesSender, {dispatcher: MessagesDispatcher}),
   document.getElementById('sender')
-  );
+);
 
-},{"delorean":14}],2:[function(require,module,exports){
+},{"delorean":15}],2:[function(require,module,exports){
+//ajax call to pass user theme information to body class
+$.ajax({
+  method: 'get',
+  url: '/getUser',
+  success: function(data){
+    var themeName = data.theme;
+    var themeChanger = function(theme){
+      var body = document.getElementsByTagName('body')[0];
+      body.className = theme;
+    };
+    themeChanger(themeName);
+  }
+});
+
+},{}],3:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -413,7 +443,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -505,13 +535,13 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 var Promise = require("./promise/promise").Promise;
 var polyfill = require("./promise/polyfill").polyfill;
 exports.Promise = Promise;
 exports.polyfill = polyfill;
-},{"./promise/polyfill":8,"./promise/promise":9}],5:[function(require,module,exports){
+},{"./promise/polyfill":9,"./promise/promise":10}],6:[function(require,module,exports){
 "use strict";
 /* global toString */
 
@@ -605,7 +635,7 @@ function all(promises) {
 }
 
 exports.all = all;
-},{"./utils":13}],6:[function(require,module,exports){
+},{"./utils":14}],7:[function(require,module,exports){
 (function (process,global){
 "use strict";
 var browserGlobal = (typeof window !== 'undefined') ? window : {};
@@ -670,7 +700,7 @@ function asap(callback, arg) {
 exports.asap = asap;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"_process":3}],7:[function(require,module,exports){
+},{"_process":4}],8:[function(require,module,exports){
 "use strict";
 var config = {
   instrument: false
@@ -686,7 +716,7 @@ function configure(name, value) {
 
 exports.config = config;
 exports.configure = configure;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){
 "use strict";
 /*global self*/
@@ -728,7 +758,7 @@ function polyfill() {
 exports.polyfill = polyfill;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./promise":9,"./utils":13}],9:[function(require,module,exports){
+},{"./promise":10,"./utils":14}],10:[function(require,module,exports){
 "use strict";
 var config = require("./config").config;
 var configure = require("./config").configure;
@@ -940,7 +970,7 @@ function publishRejection(promise) {
 }
 
 exports.Promise = Promise;
-},{"./all":5,"./asap":6,"./config":7,"./race":10,"./reject":11,"./resolve":12,"./utils":13}],10:[function(require,module,exports){
+},{"./all":6,"./asap":7,"./config":8,"./race":11,"./reject":12,"./resolve":13,"./utils":14}],11:[function(require,module,exports){
 "use strict";
 /* global toString */
 var isArray = require("./utils").isArray;
@@ -1030,7 +1060,7 @@ function race(promises) {
 }
 
 exports.race = race;
-},{"./utils":13}],11:[function(require,module,exports){
+},{"./utils":14}],12:[function(require,module,exports){
 "use strict";
 /**
   `RSVP.reject` returns a promise that will become rejected with the passed
@@ -1078,7 +1108,7 @@ function reject(reason) {
 }
 
 exports.reject = reject;
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 function resolve(value) {
   /*jshint validthis:true */
@@ -1094,7 +1124,7 @@ function resolve(value) {
 }
 
 exports.resolve = resolve;
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 function objectOrFunction(x) {
   return isFunction(x) || (typeof x === "object" && x !== null);
@@ -1117,7 +1147,7 @@ exports.objectOrFunction = objectOrFunction;
 exports.isFunction = isFunction;
 exports.isArray = isArray;
 exports.now = now;
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (DeLorean) {
   'use strict';
 
@@ -1820,7 +1850,7 @@ exports.now = now;
 
 })({});
 
-},{"./requirements":15}],15:[function(require,module,exports){
+},{"./requirements":16}],16:[function(require,module,exports){
 // ## Dependency injection file.
 
 // You can change dependencies using `DeLorean.Flux.define`. There are
@@ -1864,7 +1894,7 @@ if (typeof DeLorean !== 'undefined') {
   }
 }
 
-},{"es6-promise":4,"events":2}]},{},[1])
+},{"es6-promise":5,"events":3}]},{},[1,2])
 
 
 //# sourceMappingURL=bundle.js.map

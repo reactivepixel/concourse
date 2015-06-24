@@ -11,6 +11,7 @@ var express 			= require('express'),
 	bodyParser 			= require('body-parser'),
 	session 				= require('express-session'),
 	db     					= require('./app/config/db'),
+  Msg             = require('./app/models/msg.js'),
 	socketIO 				= require('socket.io');
 
 require('./app/config/passport')(passport); // pass passport for configuration
@@ -22,8 +23,8 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json()); 
 
+app.use(bodyParser.json()); 
 
 // View Rendering with Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
@@ -32,13 +33,12 @@ app.set('view engine', 'handlebars');
 // Disable etag headers on responses
 app.disable('etag');
 
-
 // required for passport
-app.use(session({ 
+app.use(session({
 	secret: 'WhatsMyAgeAgain', // session secret
 	resave: true,
-	saveUninitialized: true 
-})); 
+	saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -68,8 +68,11 @@ var io = socketIO.listen(server);
 io.on('connection', function (socket){
 	console.log('Connection detected');
 	socket.on('sendMessage', function (payload){
-		console.log('Msg Sent to Server', payload);
-		io.emit('newMessage', payload);
+
+	// saves messages to the database with the messages model
+	Msg.saveMessage(payload.author.email,payload.content,payload.id);
+	
+	io.emit('receiveMessage', payload);
 		console.log('Sending payload to clients\' stores');
 	});
 });

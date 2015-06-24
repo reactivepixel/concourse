@@ -1,21 +1,31 @@
-<h1><span class="fa fa-sign-in"></span> Signup</h1>
 
-    <div class="alert alert-danger">{this.props.message}</div>
+<form action="/signup" method="post" class="loginForm">
 
-<form action="/signup" method="post">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="text" class="form-control" name="email" />
+    <div id="loginFormCenter">
+        <div class="group">
+            <input class="figurine" type="text" class="form-control" name="email" required/>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class=figurineLabel>Email</label>
+        </div>
+
+        <div class="group">
+            <input class="figurine" type="text" class="form-control" name="name" required/>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class=figurineLabel>Username</label>
+        </div>
+
+        <div class="group">
+            <input class="figurine" type="password" class="form-control" name="password" required/>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class=figurineLabel>Password</label>
+        </div>
+        <button type="submit" id="login" class="ghost-button">Signup</button>
     </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" name="password" />
-    </div>
 
-    <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+    <p>Already have an account? <a href="/login">Login</a></p>
+    <p>Or go <a href="/">home</a>.</p>
+
 </form>
-
-<hr />
-
-<p>Already have an account? <a href="/login">Login</a></p>
-<p>Or go <a href="/">home</a>.</p>

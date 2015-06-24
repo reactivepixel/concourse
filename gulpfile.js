@@ -8,29 +8,31 @@ var watchify        = require('watchify'),
     sourcemaps      = require('gulp-sourcemaps'),
     assign          = require('lodash.assign'),
     reactify        = require('reactify'),
-    gulp            = require('gulp'),     
+    gulp            = require('gulp'), 
     sass            = require('gulp-ruby-sass') ,
     bower           = require('gulp-bower'),
     child_process   = require('child_process'),
     nodemon         = require('gulp-nodemon'),
-    notify          = require("gulp-notify");
+    notify          = require("gulp-notify"),
+    image 			    = require('gulp-image');
 
 var config = {
-	 sassPath:   './assets/sass',
+   sassPath:   './assets/sass',
   jsPath:     './assets/js',
-	bowerDir:   './bower_components' 
-}
- 
+	bowerDir:   './bower_components', 
+  imgPath:    './assets/img'
+};
+
 var production = process.env.NODE_ENV === 'production';
 
 // add custom browserify options here
 var customOpts = {
-  entries: ['./assets/js/main.js'],
+  entries: ['./assets/js/main.js','./assets/js/themeChanger.js'],
   debug: true
 };
 
 var opts  = assign({}, watchify.args, customOpts),
-    b     = watchify(browserify(opts)); 
+    b     = watchify(browserify(opts));
 
 // add transformations here
 b.transform(reactify);
@@ -78,7 +80,12 @@ gulp.task('dev', function () {
     .on('restart', function () {
       console.log('restarted!')
     })
-})
+});
+
+gulp.task('image', function () {
+    gulp.src('./assets/img/*')
+        .pipe(gulp.dest('./public/img'));
+});
 
 gulp.task('css', function() { 
     return gulp.src(config.sassPath + '/default.scss')
@@ -101,4 +108,4 @@ gulp.task('css', function() { 
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'icons', 'css', 'js', 'mongod', 'dev']);
+  gulp.task('default', ['bower', 'icons', 'css','image','js', 'mongod', 'dev','watch']);
