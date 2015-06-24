@@ -23,7 +23,8 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json());
+
+app.use(bodyParser.json()); 
 
 // View Rendering with Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
@@ -31,7 +32,6 @@ app.set('view engine', 'handlebars');
 
 // Disable etag headers on responses
 app.disable('etag');
-
 
 // required for passport
 app.use(session({
