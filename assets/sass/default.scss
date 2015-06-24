@@ -59,6 +59,17 @@ h4, h5, h6, li, a, label {
 }
 body{
 	font-family 		: $roboto;
+  	background-image: url(../img/91S.jpg);
+  	background-repeat: cover;
+  	background-attachment: fixed;
+}
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
 }
 
 .button{
@@ -76,19 +87,104 @@ body{
 		color 			: $white;
 	}
 }
+.ghost-button {
+  display: inline-block;
+  width: 100px;
+  padding: 12px;
+  color: #5d91ff;
+  border: 2px solid #fefdff;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  margin-top: 13px;
+  font-family: $railway;
+  font-weight: 700;
+  font-size: 1.4em;
+  -webkit-transition:All 1s ease;
+     -moz-transition:All 1s ease;
+       -o-transition:All 1s ease;
+          transition:All 1s ease;
+}
 
+.ghost-button:hover,
+.ghost-button:active {
+  background-color: ghostwhite;
+  -webkit-transition:All 1s ease;
+  	 -moz-transition:All 1s ease;
+  	   -o-transition:All 1s ease;
+  		  transition:All 1s ease;
+}
+
+a:link {
+  text-decoration: none;
+  color: grey;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #4b4b4b;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #4d76bf;
+}
+
+a:active {
+  text-decoration: none;
+}
 
 // ---------- 4: General --------------------------
+#calltoactionbar{
+	width: 100%;
+  	height: 350px;
+  	background-color: rgba(25, 25, 25, 0.5);
+  	.row{
+	  h1{
+		font-size: 1.8em;
+		text-align: center;
+		margin-top: 50px;
+		color: white;
+	  }
+	  h2{
+		font-size: 1.6em;
+		text-align: center;
+		margin-top: 10px;
+		color: white;
+	  }
+	}
+}
 
+#registerButton{
+ 	height: 75px;
+	background-color: rgba(255, 255, 255, 0.8);;
+  	.row{
+	  #signupcta{
+		width: 59%;
+		margin: 0 auto;
+		overflow: hidden;
+		h2{
+		  line-height: 78px;
+		  font-size: 1.4em;
+		  text-align: center;
+		}
+		a{
+		  margin-left: 2%;
+		}
+	  }
+	}
 
+}
 // ---------- 5: Header / Navigation --------------------------
 header{
   text-align: center;
-  font-size: 42px;
-  line-height: 60px;
-  height: 60px;
-  background: #335C7D;
+  font-size: 52px;
+  line-height: 78px;
+  height: 78px;
+  background: transparent;
   color: #fff;
+  top: 0;
+  z-index: 999;
   // set animation
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -96,7 +192,9 @@ header{
 	color:white;
 	font-family: $railway;
 	font-weight: 700;
-
+  }
+  nav{
+	visibility: hidden;
   }
 }
 
@@ -106,9 +204,31 @@ header.sticky {
   line-height: 48px;
   height: 48px;
   width: 100%;
-  background: #efc47D;
-  text-align: left;
-  padding-left: 20px;
+  background: white;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  h1{
+	float: left;
+	padding-left: 2%;
+	color: grey;
+  }
+  nav{
+	float: right;
+	visibility: visible;
+	ul{
+
+	  li{
+		float: left;
+		padding-left: 4%;
+		font-size: .8em;
+		&:nth-child(4){
+		  padding-right: 6%;
+		}
+	  }
+
+	}
+  }
 }
 
 #logo{
@@ -390,6 +510,7 @@ $xsmall : 768px;
 .row:after {
   clear: both;
 }
+
 
 // Material Design Colors - http://www.materialui.co/colors
 /////////////////////////////////////

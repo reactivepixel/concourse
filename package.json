@@ -36,6 +36,7 @@
     "gulp-browserify": "^0.5.1",
     "gulp-exec": "^2.1.1",
     "gulp-if": "^1.2.5",
+    "gulp-image": "^0.5.8",
     "gulp-jshint": "^1.10.0",
     "gulp-nodemon": "^2.0.3",
     "gulp-notify": "^2.2.0",

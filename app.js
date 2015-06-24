@@ -13,7 +13,7 @@ var express 				= require('express'),
 	db     					= require('./app/config/db'),
     Msgs                    = require('./app/models/message.js'),
 	socketIO 				= require('socket.io');
- 
+
 require('./app/config/passport')(passport); // pass passport for configuration
 
 // express config
