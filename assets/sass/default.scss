@@ -344,6 +344,8 @@ aside.channels{
 #sender{
   position: absolute;
   bottom: 40px;
+  margin-left: 50px;
+  color: white;
 }
 
 #logedInUser{
@@ -352,6 +354,10 @@ aside.channels{
   width: 100%;
   margin: 0 auto;
 }
+#messages{
+  margin-left: 50px;
+}
+
 // ---------- 8: Scrollbar --------------------------
 ::-webkit-scrollbar {
     width: 12px;
@@ -368,6 +374,12 @@ aside.channels{
 
 // ---------- 9: Inputs --------------------------
 
+form[action="/saveTheme"]{
+  label{
+	position: static;
+  }
+}
+
 button{
   background: none;
   outline: 0;
@@ -382,29 +394,29 @@ form{
 	width: 315px !important;
   }
 }
-
+input{
+  color: white;
+  background-color: transparent;
+}
 .group {
   position:relative;
   margin-bottom:45px;
 }
-
-input {
+.figurine {
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
   width:300px;
   border:none;
-  border-bottom:1px solid #757575;
-  background-color: transparent;
+  border-bottom:1px solid white;
 }
-
-input:focus {
+.figurine:focus {
   outline:none;
 }
 
 /* LABEL ======================================= */
-label {
-  color:grey;
+.figurineLabel {
+  color:ghostwhite;
   font-size:18px;
   font-weight:normal;
   position:absolute;
@@ -417,7 +429,7 @@ label {
 }
 
 /* active state */
-input:focus ~ label, input:valid ~ label {
+.figurine:focus ~ label, .figurine:valid ~ label {
   top:-20px;
   font-size:14px;
   color:white;
@@ -448,7 +460,7 @@ input:focus ~ label, input:valid ~ label {
 }
 
 /* active state */
-input:focus ~ .bar:before, input:focus ~ .bar:after {
+.figurine:focus ~ .bar:before, .figurine:focus ~ .bar:after {
   width:50%;
 }
 
@@ -464,7 +476,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 }
 
 /* active state */
-input:focus ~ .highlight {
+.figurine:focus ~ .highlight {
   -webkit-animation:inputHighlighter 0.3s ease;
   -moz-animation:inputHighlighter 0.3s ease;
   animation:inputHighlighter 0.3s ease;
@@ -472,15 +484,15 @@ input:focus ~ .highlight {
 
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
-  from { background:#5264AE; }
+  from { background:white; }
   to 	{ width:0; background:transparent; }
 }
 @-moz-keyframes inputHighlighter {
-  from { background:#5264AE; }
+  from { background:white; }
   to 	{ width:0; background:transparent; }
 }
 @keyframes inputHighlighter {
-  from { background:#5264AE; }
+  from { background:white; }
   to 	{ width:0; background:transparent; }
 }
 // ---------- 10: Media queries ------------
