@@ -86,15 +86,22 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   },
   render: function () {
     return (
-      <input 
-          type          = 'text' 
+    <div class="group">
+      <input
+          type          = 'text'
           ref           = 'message'
           onChange      = {this.handleChange}
-          onKeyUp       = {this.handleKeyUp} 
+          onKeyUp       = {this.handleKeyUp}
           value         = {this.state.message}
           className     = 'form-control'
           id            = 'message'
-          placeholder   = 'write your message here' />
+          placeholder   = 'write your message here'
+          require />
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Name</label>
+    </div>
+
     );
   }
 });

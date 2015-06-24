@@ -87,6 +87,7 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   },
   render: function () {
     return (
+    React.createElement("div", {class: "group"}, 
       React.createElement("input", {
           type: "text", 
           ref: "message", 
@@ -95,7 +96,13 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
           value: this.state.message, 
           className: "form-control", 
           id: "message", 
-          placeholder: "write your message here"})
+          placeholder: "write your message here", 
+          require: true}), 
+      React.createElement("span", {class: "highlight"}), 
+      React.createElement("span", {class: "bar"}), 
+      React.createElement("label", null, "Name")
+    )
+
     );
   }
 });
