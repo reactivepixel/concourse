@@ -35,8 +35,10 @@ $roboto 				: 'Roboto', sans-serif;
 $charcoal 				: rgba(38,50,56 ,1);
 $grey 					: rgba(97,97,97 ,1);
 $grey-light 			: rgba(117,117,117 ,1);
+$blurred-grey			: rgba(255, 255, 255, 0.6);
 $white 					: rgba(236,239,241 ,1);
 $white-hover 			: rgba(207,216,220 ,1);
+
 
 $red 					: rgba(239,83,80 ,1);
 $blue 					: rgba(33,150,243 ,1);
@@ -61,18 +63,18 @@ h4, h5, h6, li, a, label {
 body{
 	font-family 		: $roboto;
   	background-image: url(../img/91S.jpg);
-  	background-repeat: cover;
+  	background-repeat: no-repeat;
   	background-attachment: fixed;
 }
 
 a:link {
   text-decoration: none;
-  color: grey;
+  color: $grey;
 }
 
 a:visited {
   text-decoration: none;
-  color: #4b4b4b;
+  color: $grey-light;
 }
 
 a:hover {
@@ -97,13 +99,13 @@ a:active {
   width: 100px;
   padding: 12px;
   color: white;
-  border: 2px solid #fefdff;
+  border: 2px solid white;
   text-align: center;
   outline: none;
   text-decoration: none;
   margin-top: 13px;
   font-family: $railway;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.4em;
   -webkit-transition:All 1s ease;
      -moz-transition:All 1s ease;
@@ -121,6 +123,18 @@ a:active {
 }
 
 // ---------- 4: General --------------------------
+.loginForm{
+  width: 30%;
+  margin: 0 auto;
+  height: 350px;
+  border: 1px solid $white;
+}
+#loginFormCenter{
+  width:73%;
+  margin: 30px auto;
+  overflow: hidden;
+}
+
 #calltoactionbar{
 	width: 100%;
   	height: 350px;
@@ -264,73 +278,42 @@ aside.channels{
 }
 
 // ---------- 7: Messages --------------------------
-#messages{
-	max-height: 500px;
-	height: 500px;
-	overflow: auto;
-	border: 1px solid $white;
-	margin-bottom: 20px;
-	padding: 20px 0;
-}
-.user-gravatar{
-	padding-left: 0 !important;
-}
-.user_name{
-	padding: 0 !important;
-}
-.user-msg{
-	padding-left: 0 !important;
-	p{
-		padding: 5px 0 0 0 !important;
+#settingsColumn{
+  	position: absolute;
+    top:0;
+  	right: 0;
+	width: 20%;
+  	height: 100vh;
+  	background-color: $blurred-grey;
+  	h1{
+	  text-align: center;
+	  margin-top: 35px;
 	}
-}
-.new-msg{
-	display: block;
-	width: 100%;
-}
-.meta{
-	margin: 0;
-	padding: 0 !important;
-	p{
-		width: 100%;
-		clear: both;
+  	.settingsicons{
+		margin-left: 4%;
 	}
-
-}
-.options{
-	a {
-		box-shadow: $button-box-shadow;
+    #settingsFix{
+	  width: 90%;
+	  margin: 15px auto;
 	}
-}
-.dropdown{
-	padding: 0 !important;
-}
-ul.dropdown-menu{
-	left: auto !important;
-	right: 20% !important;
-	.options{
-		padding-top: 5px;
-		span{
-			padding: 0 5px;
-			a{
-				width: 100%;
-			}
-		}
-	}
-}
-button[data-toggle="dropdown"]{
-	box-shadow: $button-box-shadow;
-	background-color: #efefef;
-	border: 0;
-	border-radius: $border-radius;
-	padding: 0 6px 0 4px;
-	outline: none;
-}
-button.current-user-options{
-	background-color: $blue;
-	color: #fff;
 }
 
+#messagewindow{
+  margin-right: 20%;
+  width: 80%;
+}
+
+#sender{
+  position: absolute;
+  bottom: 40px;
+}
+
+#logedInUser{
+  position: absolute;
+  bottom: 25px;
+  width: 100%;
+  margin: 0 auto;
+}
 // ---------- 8: Scrollbar --------------------------
 ::-webkit-scrollbar {
     width: 12px;

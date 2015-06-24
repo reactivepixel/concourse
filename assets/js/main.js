@@ -86,7 +86,6 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   },
   render: function () {
     return (
-    <div class="group">
       <input
           type          = 'text'
           ref           = 'message'
@@ -97,10 +96,7 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
           id            = 'message'
           placeholder   = 'write your message here'
           require />
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Name</label>
-    </div>
+
 
     );
   }
