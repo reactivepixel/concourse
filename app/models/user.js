@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
 
     local            : {
         email        : String,
-        password     : String,
+        password     : String
     },
     facebook         : {
         id           : String,
@@ -27,8 +27,10 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
+    },
+    preferences      : {
+        theme        : String
     }
-
 });
 
 // methods ======================
@@ -42,5 +44,26 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
+// add theme
+var userModel = mongoose.model('User', userSchema);
+
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
+
+//saves theme to the user collection
+module.exports.saveTheme = function(user,theme){
+  //finds the entry based on email and then inserts the selected theme
+  userModel.update({
+    'local.email':user
+  },{
+    $set:{
+      'preferences.theme':theme
+    }
+  }, function(err,kittens){
+    if(err) return console.error(err);
+      console.log(kittens);
+  });
+
+  console.log('DB email:',user);
+	console.log('DB theme:',theme);
+};

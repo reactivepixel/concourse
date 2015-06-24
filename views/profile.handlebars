@@ -16,4 +16,16 @@
       </div>
     </div>
   </div>
+  <form action="/saveTheme" method="POST">
+    <label for="default">Default</label>
+    <input type="radio" name="theme" value="default">
+    <label for="red-theme">Red</label>
+    <input type="radio" name="theme" value="red-theme">
+    <label for="blue-theme">Blue</label>
+    <input type="radio" name="theme" value="blue-theme">
+    <button type="submit" name="button">Save Theme</button>
+  </form>
+  <div id="theme">
+    {{user.preferences.theme}}
+  </div>
 </div>

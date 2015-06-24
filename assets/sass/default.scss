@@ -7,7 +7,41 @@ $font-family-base: 'Raleway', sans-serif;
 
 @import "font-awesome";
 
+// ---------- Mixins --------------------
 
+@mixin theme($name,$bgColor,$textColor){
+	.#{$name}{
+		background-color: $bgColor;
+		color: $textColor;
+		.panel-default{
+			.panel-heading{
+				background-color: $bgColor;
+			}
+			.panel-body{
+				background-color: $bgColor;
+			}
+			#messages{
+				background-color: $bgColor;
+				div{
+					background-color: $bgColor;
+				}
+			}
+			.panel-footer{
+				background-color: $bgColor;
+				.form-group{
+					label{
+						color: $textColor;
+					}
+					#sender{
+						input{
+							color: $textColor;
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 
 // ---------- Contents --------------------
@@ -46,6 +80,7 @@ $box-shadow		 		: 2px 2px 3px rgba(0,0,0,0.3);
 $button-box-shadow 		: 0px 2px 3px rgba(0,0,0,0.3);
 $button-box-shadow-hover: 0px 1px 2px rgba(0,0,0,0.3);
 $border-radius 			: 2px;
+
 
 // ---------- 3: Organisms ---------------------
 h1, h2, h3{
@@ -87,7 +122,7 @@ body{
 		&:hover{
 			color: $grey-light;
 			background-color: transparent !important;
-		}	
+		}
 	}
 }
 .alert{
@@ -141,7 +176,7 @@ aside.channels{
 		margin: 0;
 		font-weight: 300;
 	}
-	
+
 }
 .channel-list{
 	margin: 20px 0 40px 0;
@@ -162,8 +197,8 @@ aside.channels{
 			border-radius: $border-radius;
 			background-color: rgba(255,152,0 ,1);
 			color: #fff;
-			&:hover{ 
-				color: #fff; 
+			&:hover{
+				color: #fff;
 				box-shadow: $button-box-shadow-hover;
 			}
 		}
@@ -246,20 +281,20 @@ button.current-user-options{
 ::-webkit-scrollbar {
     width: 12px;
 }
- 
+
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.2); 
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.2);
 }
- 
+
 ::-webkit-scrollbar-thumb {
     border-radius: 2px;
-    background-color: rgba(117,117,117,0.2); 
+    background-color: rgba(117,117,117,0.2);
 }
 
 // ---------- 9: Inputs --------------------------
-input#channel_title, 
+input#channel_title,
 input[type="text"],
-input[type="email"], 
+input[type="email"],
 input[type="password"],
 textarea{
 	margin: 0 0 10px 0;
@@ -343,7 +378,7 @@ $xsmall : 768px;
 	}
 	.user_name{
 		white-space: nowrap;
-		width: 100%;                   
+		width: 100%;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		padding-left: 10px;
@@ -358,7 +393,7 @@ $xsmall : 768px;
 	}
 	input{
 		width: 100% !important;
-	} 
+	}
 	.channel-list {
 		text-align: center;
 		a{
@@ -414,3 +449,11 @@ code{
 	background: rgba(117, 117, 117, 0.2);
 	color: black;
 }
+
+#theme {
+	display: none;
+}
+
+@include theme('default',$white,$charcoal);
+@include theme('red-theme',$red,$charcoal);
+@include theme('blue-theme',$blue,$charcoal);

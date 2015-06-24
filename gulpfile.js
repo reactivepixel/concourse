@@ -8,7 +8,7 @@ var watchify        = require('watchify'),
     sourcemaps      = require('gulp-sourcemaps'),
     assign          = require('lodash.assign'),
     reactify        = require('reactify'),
-    gulp            = require('gulp'),     
+    gulp            = require('gulp'), 
     sass            = require('gulp-ruby-sass') ,
     bower           = require('gulp-bower'),
     child_process   = require('child_process'),
@@ -16,21 +16,21 @@ var watchify        = require('watchify'),
     notify          = require("gulp-notify");
 
 var config = {
-	 sassPath:   './assets/sass',
+   sassPath:   './assets/sass',
   jsPath:     './assets/js',
 	bowerDir:   './bower_components' 
 }
- 
+
 var production = process.env.NODE_ENV === 'production';
 
 // add custom browserify options here
 var customOpts = {
-  entries: ['./assets/js/main.js'],
+  entries: ['./assets/js/main.js','./assets/js/themeChanger.js'],
   debug: true
 };
 
 var opts  = assign({}, watchify.args, customOpts),
-    b     = watchify(browserify(opts)); 
+    b     = watchify(browserify(opts));
 
 // add transformations here
 b.transform(reactify);
