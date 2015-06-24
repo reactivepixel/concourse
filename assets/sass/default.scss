@@ -320,13 +320,14 @@ aside.channels{
 #sender{
   position: absolute;
   bottom: 40px;
-  color: white;
 	width: 70%;
 	margin-right: 20%;
 	margin-left: 5%;
+	padding-top: 30px;
 	input {
 		width: 100%;
 		background-color: none;
+		color: black;
 		border: none;
 		border-bottom: 2px solid $charcoal;
 		&:focus {
