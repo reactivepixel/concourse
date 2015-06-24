@@ -5,16 +5,16 @@ var Flux = require('delorean').Flux;
 var fakeMsgID = 0;
 
 
-// var for user's email after ajax call
-var userEmail;
+// var for user's name after ajax call
+var userName;
 
 
-// Grabs user Email from the getUser route
+// Grabs user name from the getUser route
 $.ajax({
- url: '/getEmail',
+ url: '/getName',
  method: 'GET',
  success: function(data){
-   userEmail = data;
+   userName = data;
  }
 });
 
@@ -94,7 +94,7 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   handleKeyUp: function (e) {
     if (e.keyCode == 13) {
       var message = this.state.message;
-      MessageActions.sendMessage(userEmail, message);
+      MessageActions.sendMessage(userName, message);
       this.setState({message: ''});
     }
   },
