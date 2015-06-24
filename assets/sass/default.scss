@@ -1,12 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,700,300);
 $font-family-base: 'Raleway', sans-serif;
-// Import bootstrap and fontawesome
- // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
-//@import "bootstrap-sprockets";
-//@import "bootstrap";
 
 @import "meyer_reset";
-@import "font-awesome";
 
 // ---------- Mixins --------------------
 
@@ -229,8 +224,8 @@ header.sticky {
 		float: left;
 		padding-left: 4%;
 		font-size: .8em;
-		&:nth-child(4){
-		  padding-right: 6%;
+		&:nth-child(2){
+		  padding-right: 10%;
 		}
 	  }
 
@@ -285,6 +280,25 @@ aside.channels{
 	border-color: $white !important;
 }
 
+#aboutusbar{
+  width: 100%;
+  height: 450px;
+  background-color: white;
+  .row{
+	h1{
+	  font-size: 2.4em;
+	  text-align: center;
+	  margin-top: 50px;
+	  color: grey;
+	}
+	h2{
+	  font-size: 1.6em;
+	  text-align: center;
+	  margin-top: 10px;
+	  color: grey;
+	}
+  }
+}
 // ---------- 7: Messages --------------------------
 #settingsColumn{
   	position: absolute;
@@ -326,10 +340,11 @@ aside.channels{
 	padding-top: 30px;
 	input {
 		width: 100%;
-		background-color: none;
+		background-color: transparent;
 		color: black;
 		border: none;
 		border-bottom: 2px solid $charcoal;
+	  	line-height: 30px;
 		&:focus {
 			outline: none;
 		}
