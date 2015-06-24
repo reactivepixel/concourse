@@ -16,7 +16,7 @@ var watchify        = require('watchify'),
     notify          = require("gulp-notify");
 
 var config = {
- sassPath:   './assets/sass',
+   sassPath:   './assets/sass',
   jsPath:     './assets/js',
 	bowerDir:   './bower_components' 
 }
