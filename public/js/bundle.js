@@ -126,6 +126,7 @@ React.render(
 );
 
 },{"delorean":15}],2:[function(require,module,exports){
+//ajax call to pass user theme information to body class
 $.ajax({
   method: 'get',
   url: '/getUser',

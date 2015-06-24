@@ -17,33 +17,6 @@ $font-family-base: 'Raleway', sans-serif;
 		background-attachment: fixed;
 		background-color: $bgColor;
 		color: $textColor;
-		.panel-default{
-			.panel-heading{
-				background-color: $bgColor;
-			}
-			.panel-body{
-				background-color: $bgColor;
-			}
-			#messages{
-				background-color: $bgColor;
-				div{
-					background-color: $bgColor;
-				}
-			}
-			.panel-footer{
-				background-color: $bgColor;
-				.form-group{
-					label{
-						color: $textColor;
-					}
-					#sender{
-						input{
-							color: $textColor;
-						}
-					}
-				}
-			}
-		}
 	}
 }
 
@@ -75,7 +48,6 @@ $grey-light 			: rgba(117,117,117 ,1);
 $blurred-grey			: rgba(255, 255, 255, 0.6);
 $white 					: rgba(236,239,241 ,1);
 $white-hover 			: rgba(207,216,220 ,1);
-
 
 $red 					: rgba(239,83,80 ,1);
 $blue 					: rgba(33,150,243 ,1);

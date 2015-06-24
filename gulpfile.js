@@ -14,13 +14,13 @@ var watchify        = require('watchify'),
     child_process   = require('child_process'),
     nodemon         = require('gulp-nodemon'),
     notify          = require("gulp-notify"),
-    image 			= require('gulp-image');
+    image 			    = require('gulp-image');
 
 var config = {
-	 sassPath:   './assets/sass',
-    jsPath:     './assets/js',
+   sassPath:   './assets/sass',
+  jsPath:     './assets/js',
 	bowerDir:   './bower_components', 
-    imgPath:    './assets/img'
+  imgPath:    './assets/img'
 };
 
 var production = process.env.NODE_ENV === 'production';
