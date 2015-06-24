@@ -1,9 +1,11 @@
 var socket = io();
 var Flux = require('delorean').Flux;
 var userN = document.getElementById("userEmail").innerHTML;
+<<<<<<< HEAD
 
 
-
+=======
+>>>>>>> b297bd3b471d2fed8c1eaa366c946a3c8cd95f93
 
 var fakeMsgID = 0;
 
