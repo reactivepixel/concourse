@@ -1,14 +1,16 @@
 var socket = io();
 var Flux = require('delorean').Flux;
+
 var fakeMsgID = 0;
 
 
 // var for user's email after ajax call
 var userEmail;
 
+
 // Grabs user Email from the getUser route
 $.ajax({
- url: '/getUser',
+ url: '/getEmail',
  method: 'GET',
  success: function(data){
    userEmail = data;
