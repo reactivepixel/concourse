@@ -36,38 +36,38 @@ $opensans 			: 'Open Sans', sans-serif;
 $roboto 				: 'Roboto', sans-serif;
 
 // ---------- 2: Colors & other variables -----
-$charcoal 				: rgba(38,50,56 ,1);
+$charcoal 			: rgba(38,50,56 ,1);
 $grey 					: rgba(97,97,97 ,1);
-$grey-light 			: rgba(117,117,117 ,1);
-$blurred-grey			: rgba(255, 255, 255, 0.6);
+$grey-light 		: rgba(117,117,117 ,1);
+$blurred-grey		: rgba(255, 255, 255, 0.6);
 $white 					: rgba(236,239,241 ,1);
-$white-hover 			: rgba(207,216,220 ,1);
+$white-hover 		: rgba(207,216,220 ,1);
 
-$red 					: rgba(239,83,80 ,1);
+$red 						: rgba(239,83,80 ,1);
 $blue 					: rgba(33,150,243 ,1);
 $green 					: rgba(76,175,80 ,1);
 $orange 				: rgba(255,152,0 ,1);
-$atomicBlue				: #4d76bf;
+$atomicBlue			: #4d76bf;
 
-$box-shadow		 		: 2px 2px 3px rgba(0,0,0,0.3);
-$button-box-shadow 		: 0px 2px 3px rgba(0,0,0,0.3);
-$button-box-shadow-hover: 0px 1px 2px rgba(0,0,0,0.3);
-$border-radius 			: 2px;
+$box-shadow		 						: 2px 2px 3px rgba(0,0,0,0.3);
+$button-box-shadow 				: 0px 2px 3px rgba(0,0,0,0.3);
+$button-box-shadow-hover	: 0px 1px 2px rgba(0,0,0,0.3);
+$border-radius 						: 2px;
 
 // ---------- 3: Organisms ---------------------
 h1, h2, h3{
 	font-family 		: $opensans;
-  	font-weight 		: 300;
-  	color 				: rgba(97,97,97 ,1);
+	font-weight 		: 300;
+	color 					: rgba(97,97,97 ,1);
 }
 h4, h5, h6, li, a, label {
 	font-family 		: $opensans;
 }
 body{
-	font-family 		: $roboto;
-  	background-image: url(../img/91S.jpg);
-  	background-repeat: no-repeat;
-  	background-attachment: fixed;
+	font-family 					: $roboto;
+	background-image      : url(../img/91S.jpg);
+	background-repeat     : no-repeat;
+	background-attachment : fixed;
 }
 
 a:link {

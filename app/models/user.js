@@ -63,7 +63,4 @@ module.exports.saveTheme = function(user,theme){
     if(err) return console.error(err);
       console.log(kittens);
   });
-
-  console.log('DB email:',user);
-	console.log('DB theme:',theme);
 };

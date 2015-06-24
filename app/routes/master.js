@@ -47,8 +47,6 @@ module.exports = function(app, passport) {
 
     //gets the user theme selection for the radio buttons and saves it to the users collection in the db
     app.post('/saveTheme', userAuthRequired, function(req, res) {
-        console.log(req.body);
-        console.log('theme: '+req.body.theme);
         User.saveTheme(req.user.local.email,req.body.theme);
         res.redirect('/profile');
     });
