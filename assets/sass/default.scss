@@ -13,8 +13,36 @@ $font-family-base: 'Raleway', sans-serif;
 	.#{$name}{
 		background-color: $bgColor;
 		color: $textColor;
+		.panel-default{
+			.panel-heading{
+				background-color: $bgColor;
+			}
+			.panel-body{
+				background-color: $bgColor;
+			}
+			#messages{
+				background-color: $bgColor;
+				div{
+					background-color: $bgColor;
+				}
+			}
+			.panel-footer{
+				background-color: $bgColor;
+				.form-group{
+					label{
+						color: $textColor;
+					}
+					#sender{
+						input{
+							color: $textColor;
+						}
+					}
+				}
+			}
+		}
 	}
 }
+
 
 // ---------- Contents --------------------
 // ---------- 1: Typography
