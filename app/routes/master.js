@@ -51,16 +51,16 @@ module.exports = function(app, passport) {
         res.redirect('/profile');
     });
 
-    //sends user email in json to be entered into the message view
-    app.get('/getEmail', userAuthRequired, function(req, res) {
+    //sends user name in json to be entered into the message view
+    app.get('/getName', userAuthRequired, function(req, res) {
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ email: req.user.local.email}, null, 3));
+        res.send(JSON.stringify({ name: req.user.local.name}, null, 3));
     });
 
     //sends user theme in json to be processed by the themeChanger.js file
     app.get('/getUser', function(req, res) {
          res.setHeader('Content-Type', 'application/json');
-         res.send(JSON.stringify({ email: req.user.local.email , theme: req.user.preferences.theme }, null, 3));
+         res.send(JSON.stringify({theme: req.user.preferences.theme }, null, 3));
     });
 
     // route /profile
