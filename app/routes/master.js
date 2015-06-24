@@ -59,8 +59,8 @@ module.exports = function(app, passport) {
 
     //sends user theme in json to be processed by the themeChanger.js file
     app.get('/getUser', function(req, res) {
-         res.setHeader('Content-Type', 'application/json');
-         res.send(JSON.stringify({ email: req.user.local.email , theme: req.user.preferences.theme }, null, 3));
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({ email: req.user.local.email , theme: req.user.preferences.theme }, null, 3));
     });
 
     // route /profile
@@ -71,7 +71,7 @@ module.exports = function(app, passport) {
             user : req.user,
             json : JSON.stringify(req.user)
 
-             // get the user out of session and pass to template
+            // get the user out of session and pass to template
         });
     });
     // =====================================
