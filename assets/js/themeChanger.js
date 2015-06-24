@@ -1,3 +1,4 @@
+//ajax call to pass user theme information to body class
 $.ajax({
   method: 'get',
   url: '/getUser',

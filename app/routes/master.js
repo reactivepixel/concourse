@@ -39,19 +39,13 @@ module.exports = function(app, passport) {
         });
     });
     // process the signup form  socket.on('sendMessage', function (payload){
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 
-        app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/signup', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
-        }));
-
-    app.get('/hello', function(req, res) {
-        res.render('form', {
-            name: 'killer',
-            message: req.flash('signupMessage')
-        });
-    });
+    //gets the user theme selection for the radio buttons and saves it to the users collection in the db
     app.post('/saveTheme', userAuthRequired, function(req, res) {
         console.log(req.body);
         console.log('theme: '+req.body.theme);
@@ -59,12 +53,13 @@ module.exports = function(app, passport) {
         res.redirect('/profile');
     });
 
+    //sends user email in json to be entered into the message view
     app.get('/getEmail', userAuthRequired, function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ email: req.user.local.email}, null, 3));
-    }); 
+    });
 
-
+    //sends user theme in json to be processed by the themeChanger.js file
     app.get('/getUser', function(req, res) {
          res.setHeader('Content-Type', 'application/json');
          res.send(JSON.stringify({ email: req.user.local.email , theme: req.user.preferences.theme }, null, 3));
