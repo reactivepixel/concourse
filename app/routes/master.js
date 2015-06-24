@@ -57,12 +57,20 @@ module.exports = function(app, passport) {
         User.saveTheme(req.user.local.email,req.body.theme);
         res.redirect('/profile');
     });
+
+    app.get('/getUser', function(req, res) {
+         res.setHeader('Content-Type', 'application/json');
+         res.send(JSON.stringify({ email: req.user.local.email , theme: req.user.preferences.theme }, null, 3));
+    });
+
     // route /profile
     app.get('/profile', userAuthRequired, function(req, res) {
         res.render('profile', {
             name: 'killer',
             message: req.flash('signupMessage'),
-            user : req.user
+            user : req.user,
+            json : JSON.stringify(req.user)
+
              // get the user out of session and pass to template
         });
     });
