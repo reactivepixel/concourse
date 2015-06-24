@@ -50,8 +50,9 @@ var userModel = mongoose.model('User', userSchema);
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
 
-
+//saves theme to the user collection
 module.exports.saveTheme = function(user,theme){
+  //finds the entry based on email and then inserts the selected theme
   userModel.update({
     'local.email':user
   },{
@@ -66,4 +67,3 @@ module.exports.saveTheme = function(user,theme){
   console.log('DB email:',user);
 	console.log('DB theme:',theme);
 };
-
