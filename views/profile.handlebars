@@ -17,14 +17,14 @@
         <h1 id="logedInUser">Hello: {{user.local.email}}</h1>
     {{/if}}
 
-    <form action="/saveTheme" method="POST">
+    <form class="clearfix" action="/saveTheme" method="POST">
         <label for="default">Default</label>
         <input type="radio" name="theme" value="default">
         <label for="red-theme">Red</label>
         <input type="radio" name="theme" value="red-theme">
         <label for="blue-theme">Blue</label>
         <input type="radio" name="theme" value="blue-theme">
-        <label for="white-theme">Blue</label>
+        <label for="white-theme">White</label>
         <input type="radio" name="theme" value="white-theme">
         <button type="submit" name="button">Save Theme</button>
     </form>
