@@ -13,13 +13,15 @@ var watchify        = require('watchify'),
     bower           = require('gulp-bower'),
     child_process   = require('child_process'),
     nodemon         = require('gulp-nodemon'),
-    notify          = require("gulp-notify");
+    notify          = require("gulp-notify"),
+    image 			= require('gulp-image');
 
 var config = {
-   sassPath:   './assets/sass',
-  jsPath:     './assets/js',
-	bowerDir:   './bower_components' 
-}
+	 sassPath:   './assets/sass',
+    jsPath:     './assets/js',
+	bowerDir:   './bower_components', 
+    imgPath:    './assets/img'
+};
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -78,7 +80,12 @@ gulp.task('dev', function () {
     .on('restart', function () {
       console.log('restarted!')
     })
-})
+});
+
+gulp.task('image', function () {
+    gulp.src('./assets/img/*')
+        .pipe(gulp.dest('./public/img'));
+});
 
 gulp.task('css', function() { 
     return gulp.src(config.sassPath + '/default.scss')
@@ -101,4 +108,4 @@ gulp.task('css', function() { 
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'icons', 'css', 'js', 'mongod', 'dev']);
+  gulp.task('default', ['bower', 'icons', 'css','image','js', 'mongod', 'dev','watch']);

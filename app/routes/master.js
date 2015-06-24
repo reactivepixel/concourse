@@ -9,7 +9,7 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index', {
             name: 'World',
-            page_title: 'SEO Time',
+            page_title: 'Welcome | Concourse',
             markup: ''
         });
     });
@@ -19,7 +19,7 @@ module.exports = function(app, passport) {
         res.render('login', {
             message: req.flash('loginMessage'),
             name: 'killer',
-            page_title: 'We\'re gonna need a bigger boat'
+            page_title: 'Login | Concourse'
         });
     });
 
@@ -34,7 +34,8 @@ module.exports = function(app, passport) {
     app.get('/signup', function(req, res) {
         res.render('signup', {
             name: 'killer',
-            message: req.flash('signupMessage')
+            message: req.flash('signupMessage'),
+            page_title: 'Register | Concourse'
         });
     });
     // process the signup form  socket.on('sendMessage', function (payload){
@@ -93,9 +94,10 @@ module.exports = function(app, passport) {
 function userAuthRequired(req, res, next) {
 
     // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
+    if (req.isAuthenticated()){
         return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
+    }else{
+        // if they aren't redirect them to the home page
+        res.redirect('/');
+    }
 }

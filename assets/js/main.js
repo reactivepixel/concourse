@@ -107,7 +107,10 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
           value         = {this.state.message}
           className     = 'form-control'
           id            = 'message'
-          placeholder   = 'write your message here' />
+          placeholder   = 'write your message here'
+          require />
+
+
     );
   }
 });
