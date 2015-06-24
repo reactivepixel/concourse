@@ -57,6 +57,10 @@ module.exports = function(app, passport) {
         User.saveTheme(req.user.local.email,req.body.theme);
         res.redirect('/profile');
     });
+    app.get('/getUser', function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({ email: req.user.local.email}, null, 3));
+    }); 
     // route /profile
     app.get('/profile', userAuthRequired, function(req, res) {
         res.render('profile', {

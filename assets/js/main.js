@@ -1,13 +1,19 @@
 var socket = io();
 var Flux = require('delorean').Flux;
-var userN = document.getElementById("userEmail").innerHTML;
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b297bd3b471d2fed8c1eaa366c946a3c8cd95f93
-
 var fakeMsgID = 0;
+
+
+// var for user's email after ajax call
+var userEmail;
+
+// Grabs user Email from the getUser route
+$.ajax({
+ url: '/getUser',
+ method: 'GET',
+ success: function(data){
+   userEmail = data;
+ }
+});
 
 //Creates the array where the message will be stored to be grab and handle later.
 var Messages = Flux.createStore({
@@ -85,7 +91,7 @@ var MessagesSender = React.createClass({displayName: 'MessagesSender',
   handleKeyUp: function (e) {
     if (e.keyCode == 13) {
       var message = this.state.message;
-      MessageActions.sendMessage(userN, message);
+      MessageActions.sendMessage(userEmail, message);
       this.setState({message: ''});
     }
   },
