@@ -4,7 +4,6 @@ var JSX         = require('node-jsx').install(),
 
 module.exports = function(app, passport) {
 
-
     // route /
     app.get('/', function(req, res) {
         res.render('index', {
