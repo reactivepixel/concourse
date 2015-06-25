@@ -1,14 +1,14 @@
-<div id="settingscolumn" class="right">
+<div id="settingsColumn" class="right">
     <h1>Channel Name</h1>
 
         <div id="settingsFix">
-            <div class="settingsicons left">
+            <div class="settingsIcons left">
                 <a href="/logout"><i class="fa fa-sign-out"></i> Log Out</a>
             </div>
-            <div class="settingsicons left">
+            <div class="settingsIcons left">
                 <a href="/profile"><i class="fa fa-user"></i> Profile</a>
             </div>
-            <div class="settingsicons left">
+            <div class="settingsIcons left">
                 <a href="/settings"><i class="fa fa-cogs"></i> Settings</a>
             </div>
         </div>
@@ -17,7 +17,7 @@
         <h1 id="logedinuser">Hello: {{user.local.name}}</h1>
     {{/if}}
 
-    <form class="clearfix" action="/saveTheme" method="POST">
+    <form action="/saveTheme" method="POST">
         <label for="default">Default</label>
         <input type="radio" name="theme" value="default">
         <label for="red-theme">Red</label>
@@ -30,9 +30,9 @@
     </form>
 </div>
 
-<div id="messagewindow">
-    <div id="messages"></div>
-</div>
+
+<div id="messages"></div>
+
 
 
 <div id="sender">
