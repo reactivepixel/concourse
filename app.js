@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 
 // View Rendering with Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'default'}));
@@ -71,8 +71,8 @@ io.on('connection', function (socket){
 
 	// saves messages to the database with the messages model
 	Msg.saveMessage(payload.author.email,payload.content,payload.id);
-	
+
 	io.emit('receiveMessage', payload);
-		console.log('Sending payload to clients\' stores');
+		console.log('Sending payload '+payload.id+' to clients\' stores');
 	});
 });
